@@ -87,6 +87,10 @@ class Game{
 
 	 }
 
+	initialize(pattern){
+		pattern.randomize;
+	}
+
 	//start the frameLoop
 	start(){
 		if(!this.running){
