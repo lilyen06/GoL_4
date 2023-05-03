@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<!--HTML ROOT ELEMENT-->
+<html>
+
+	<!--HEADER-->
+	<head>
+
+		<!--TITLE-->
+		<title>Game Of Life</title>
+		<!--METADATA-->
+		<meta name = "viewport" content = "user-scalable=no,width=device-width">
+		<!--CSS-->
+		<link href = "w3.css" rel = "stylesheet" type = "text/css"><!--ADDED w3.css classes-->
+		<link href = "GoL.css" rel = "stylesheet" type = "text/css">
+
+	</head>
+
+	<!--BODY-->
+	<body class="w3-row">
+		<!--LEFT MARGIN 1/12 WIDE-->
+		<div class = "w3-col s1"><p> </p></div>
+		<!--LEFT COLUMN 5/12 WIDE-->
+		<div class = "w3-col s5">
+    		<h3>Conway's Game of Life </h3>
+			<a href = "https://www.w3schools.com/jsref/default.asp">JavaScript Reference</a>
+			<a href = "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript">JavaScript Classes Tutorial</a>
+			<br><!--this is a line break tag-->
+			<canvas>Update your browser to display the canvas.</canvas>
+		</div>
+		<!--RIGHT COLUMN 5/12 WIDE-->
+		<div class = "w3-col s5">
+			<h3>Generation Plotter </h3>
+			<a href = "https://www.w3schools.com/w3css/w3css_responsive.asp">w3.css Reference</a>
+			<a href = "https://www.w3schools.com/js/js_graphics_canvas.asp">JavaScript Canvas Tutorial</a>
+			<br><!--this is a line break tag-->
+			<canvas>Update your browser to display the canvas.</canvas>
+		</div>
+		<!--RIGHT MARGIN 1/12 WIDE-->
+		<div class = "w3-col s1"><p> </p></div>
+
+	</body>
+
+	<!--FOOTER-->
+
+	<!--STICK FOOTER TO BOTTOM OF WINDOW-->
+	<footer class="w3-bottom">
+		
+		<p id="generation">Cells alive: 0 Generation : 0</p>
+		<button onclick="conway.start()">Start</button>
+		<button onclick="conway.stop()">Stop</button>
+
+	</footer>
+	
+	<!--JS SCRIPTS-->
+	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="functions.js"></script>
+	<script type="text/javascript" src="Cell.js"></script>
+	<script type="text/javascript" src="CellArray.js"></script>
+	<script type="text/javascript" src="Game.js"></script>
+	
+
+</html>
