@@ -19,7 +19,7 @@ class Pattern{
                 xrand = Math.floor(Math.random()*this.cols);
                 yrand = Math.floor(Math.random()*this.rows);
             }
-            this.grid.turnOn(xrand+(this.game.columns/2-this.cols/2),yrand+(this.game.rows/2-this.rows/2));
+            this.grid.turnOn(yrand+Math.floor((this.rows+this.rows)/2),xrand+Math.floor((this.game.columns+this.cols)/2));
             xlast = xrand;
             ylast = yrand;
         }
