@@ -1,6 +1,6 @@
 class Cell{
 	//declaration of instance variables is optional, but good practice
-	x; y; size; state; colors;
+	x; y; size; state; colors; //hi
 
 	//constructor is named as such and takes a similar form to that in Java
 	constructor(x, y, size){
