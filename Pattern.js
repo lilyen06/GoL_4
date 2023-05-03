@@ -10,15 +10,16 @@ class Pattern{
     }
 
     randomize(){
-        xlast = null;
-        ylast = null;
-        for (i=0;i<this.numAlive;i++){
-            xrand = Math.floor(Math.random()*cols);
-            yrand = Math.floor(Math.random()*rows);
-            if(xrand==xlast && yrand==ylast){
-                this.grid.turnOn(xrand+(game.cols/2-cols/2),yrand+(game.rows/2-rows/2));
-                i--;
+        let xlast = null;
+        let ylast = null;
+        for (let i=0;i<this.numAlive;i++){
+            let xrand = Math.floor(Math.random()*this.cols);
+            let yrand = Math.floor(Math.random()*this.rows);
+            while(xrand==xlast && yrand==ylast){
+                xrand = Math.floor(Math.random()*this.cols);
+                yrand = Math.floor(Math.random()*this.rows);
             }
+            this.grid.turnOn(xrand+(this.game.columns/2-this.cols/2),yrand+(this.game.rows/2-this.rows/2));
             xlast = xrand;
             ylast = yrand;
         }

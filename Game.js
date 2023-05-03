@@ -88,7 +88,7 @@ class Game{
 	 }
 
 	initialize(pattern){
-		pattern.randomize;
+		pattern.randomize();
 		this.grid.draw();
 	}
 
