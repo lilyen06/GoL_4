@@ -1,4 +1,3 @@
-java.util.random;
 class Pattern{
     rows;cols;numAlive;grid;game;
 
@@ -14,8 +13,8 @@ class Pattern{
         xlast = null;
         ylast = null;
         for (i=0;i<this.numAlive;i++){
-            xrand = random(cols);
-            yrand = random(rows);
+            xrand = Math.floor(Math.random()*cols);
+            yrand = Math.floor(Math.random()*rows);
             if(xrand==xlast && yrand==ylast){
                 this.grid.turnOn(xrand+(game.cols/2-cols/2),yrand+(game.rows/2-rows/2));
                 i--;
