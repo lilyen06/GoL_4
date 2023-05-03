@@ -89,6 +89,7 @@ class Game{
 
 	initialize(pattern){
 		pattern.randomize;
+		this.grid.draw();
 	}
 
 	//start the frameLoop
