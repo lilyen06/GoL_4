@@ -3,7 +3,7 @@ class Plotter{
 	plotter;
 
 	constructor(){
-
+		this.plotter = plotter;
 	}
 
 	initialize(){
