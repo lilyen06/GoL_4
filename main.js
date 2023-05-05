@@ -10,12 +10,11 @@ var mousedown = false;
 //main function is called on windowload event
 window.addEventListener("load", function(event) {
 
-	//instantiate game (columns, rows, cellsize, toroidal overlap)
-	conway = new Game(50, 40, 7, false);
-	conway.initialize();
-
 	plotter = new Plotter(10, 10);
 	plotter.initialize();
+	//instantiate game (columns, rows, cellsize, toroidal overlap)
+	conway = new Game(50, 40, 7, false, plotter);
+	conway.initialize();
 
 });
 

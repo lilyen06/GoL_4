@@ -3,14 +3,14 @@ class Game{
 	grid; rows; columns; cellsize; frames; running;
 
 	//constructor is named as such and takes a similar form to that in Java
-	constructor(columns, rows, cellsize, toroidal){
+	constructor(columns, rows, cellsize, toroidal, plotter){
 		this.columns = columns;
 		this.rows = rows;
 		this.cellsize = cellsize;
 		this.grid = new CellArray(columns, rows, cellsize, toroidal); // builds the CellArray object
 		this.frames = 0;
 		this.running = false;
-
+		this.plotter = plotter;
 	}
 
 	//intitiaizes the canvas
@@ -91,7 +91,7 @@ class Game{
 	start(){
 		if(!this.running){
 			this.running = true;
-			window.requestAnimationFrame(()=>this.frameLoop());	
+			window.requestAnimationFrame(()=>this.frameLoop());
 		}	
 	}
 
@@ -188,6 +188,8 @@ class Game{
 		this.grid.draw();
 		//updates the HTML elements
 		this.updateHTML();
+
+		this.plotter.draw(this.frames, this.cellsAlive());
 		//frame counter
 		this.frames++;
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
