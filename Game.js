@@ -112,6 +112,7 @@ class Game{
 				this.grid.turnOff(r, c);
 			}
 		}
+		this.frames = 0;
 		this.grid.draw();
 	}
 	

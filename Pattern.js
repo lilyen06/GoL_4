@@ -18,6 +18,7 @@ class Pattern{
             while(xrand==xlast && yrand==ylast){
                 xrand = Math.floor(Math.random()*this.cols);
                 yrand = Math.floor(Math.random()*this.rows);
+                console.log("repeat");
             }
             let y = yrand+Math.floor(this.game.rows/2-this.rows/2)
             let x = xrand+Math.floor(this.game.columns/2-this.cols/2)
