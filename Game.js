@@ -84,7 +84,6 @@ class Game{
 		this.grid.array[11][42].turnOn();
 
 		this.grid.draw();
-
 	 }
 
 	//start the frameLoop
@@ -99,8 +98,6 @@ class Game{
 	stop(){
 		if(this.running)this.running = false;	
 	}
-
-
 	
 	//updates the game with the new neighboes count
 	update() {
@@ -131,8 +128,6 @@ class Game{
 				}
 		}
 	}
-	
-
 	 
 	//populates the counts[][] with the countAlive values
 	countNeighbors() {
@@ -181,6 +176,30 @@ class Game{
 		return count;
 	}
 
+	avgPosX(){
+		let allX=0;
+		for(let j = 0; i<this.columns; i++){
+			for(let i = 0; j<this.rows; j++){
+				if(this.grid[j][i].isOn()){
+					allX+=i*this.cellsize;
+				}
+			}
+		}
+		return allX/cellsAlive();
+	}
+
+	avgPosY(){
+		let allY=0;
+		for(let j = 0; i<this.columns; i++){
+			for(let i = 0; j<this.rows; j++){
+				if(this.grid[j][i].isOn()){
+					allY+=j*this.cellsize;
+				}
+			}
+		}
+		return allY/cellsAlive();
+	}
+
 	//this is the frame loop that executes every generation
 	frameLoop(){
 		//frame update and draw
@@ -188,12 +207,14 @@ class Game{
 		this.grid.draw();
 		//updates the HTML elements
 		this.updateHTML();
-
+		this.plotter.initialize();
+		// draws the plotter
 		this.plotter.draw(this.frames, this.cellsAlive());
+		//this.plotter.draw(avgPosX(), avgPosY());
 		//frame counter
 		this.frames++;
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
-		if(this.running)setTimeout(()=>window.requestAnimationFrame(()=>this.frameLoop()), 1000/60);
+		if(this.running)setTimeout(()=>window.requestAnimationFrame(()=>this.frameLoop()), 1000/24);
 
 	}
 
