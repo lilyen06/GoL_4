@@ -94,7 +94,16 @@ class Game{
 	}
 
 	drawLastPat(){
-		this.pattern.draw();
+		let r, c;
+		for (r = 0; r < this.rows; r++) {
+			for (c = 0; c < this.columns; c++) {
+				if (this.pattern.isOn(r,c)){
+					this.grid.turnOn(r,c);
+				}
+			}
+		}
+		this.frames = 0;
+		this.grid.draw();
 	}
 
 	//start the frameLoop
