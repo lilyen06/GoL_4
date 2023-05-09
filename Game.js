@@ -105,7 +105,15 @@ class Game{
 		if(this.running)this.running = false;	
 	}
 
-
+	clear(){
+		let r, c;
+		for (r = 0; r < this.rows; r++) {
+			for (c = 0; c < this.columns; c++) {
+				this.grid.turnOff(r, c);
+			}
+		}
+		this.grid.draw();
+	}
 	
 	//updates the game with the new neighboes count
 	update() {
