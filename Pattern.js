@@ -10,6 +10,7 @@ class Pattern{
     }
 
     randomize(){
+        let pattern = new CellArray(this.game.columns, this.game.rows, this.game.cellsize, this.game.toroidal);
         for (let i=0;i<this.numAlive;i++){
             let xrand = Math.floor(Math.random()*this.cols);
             let yrand = Math.floor(Math.random()*this.rows);
@@ -22,6 +23,8 @@ class Pattern{
                 x = xrand+Math.floor(this.game.columns/2-this.cols/2)
             }
             this.grid.turnOn(y,x);
+            pattern.turnOn(y,x);
         }
+        return pattern;
     }
 }
