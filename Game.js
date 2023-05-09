@@ -204,6 +204,10 @@ class Game{
 		this.updateHTML();
 		//frame counter
 		this.frames++;
+		if (this.frames > 100){
+			this.clear();
+			this.initialize(new Pattern(6,5,conway,10));
+		}
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
 		if(this.running)setTimeout(()=>window.requestAnimationFrame(()=>this.frameLoop()), 1000/60);
 
