@@ -209,6 +209,11 @@ class Game{
 		return count;
 	}
 
+	reloop(){
+		this.clear();
+		this.initialize(new Pattern(6,5,conway,10));
+	}
+
 	//this is the frame loop that executes every generation
 	frameLoop(){
 		//frame update and draw
@@ -219,8 +224,7 @@ class Game{
 		//frame counter
 		this.frames++;
 		if (this.frames > 100){
-			this.clear();
-			this.initialize(new Pattern(6,5,conway,10));
+			//this.reloop();
 		}
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
 		if(this.running)setTimeout(()=>window.requestAnimationFrame(()=>this.frameLoop()), 1000/60);
