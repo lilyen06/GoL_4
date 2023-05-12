@@ -112,13 +112,16 @@ class Game{
 	 */
 	drawLastPat(){
 		let r, c;
+		// loop through all cells
 		for (r = 0; r < this.rows; r++) {
 			for (c = 0; c < this.columns; c++) {
+				// transcribe on pattern cells to grid pattern cells
 				if (this.pattern.isOn(r,c)){
 					this.grid.turnOn(r,c);
 				}
 			}
 		}
+		// reset operator interface
 		this.frames = 0;
 		this.grid.draw();
 	}
@@ -145,11 +148,14 @@ class Game{
 	 */
 	clear(){
 		let r, c;
+		// loop through all cells
 		for (r = 0; r < this.rows; r++) {
 			for (c = 0; c < this.columns; c++) {
+				// turn off given cell
 				this.grid.turnOff(r, c);
 			}
 		}
+		// reset operator interface
 		this.frames = 0;
 		this.grid.draw();
 	}
@@ -274,7 +280,7 @@ class Game{
 		//frame counter
 		this.frames++;
 		if (this.frames > 100){
-			//this.reloop();
+			//this.reloop(); // uncomment for automatic relooping
 		}
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
 		if(this.running)setTimeout(()=>window.requestAnimationFrame(()=>this.frameLoop()), 1000/60);
