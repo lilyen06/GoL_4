@@ -17,11 +17,11 @@ class Game{
 	initialize(){
 
 		// //glider -- in array coordinates array[y][x]
-		// this.grid.array[1][13].turnOn();
-		// this.grid.array[2][13].turnOn();
-		// this.grid.array[3][13].turnOn();
-		// this.grid.array[3][12].turnOn();
-		// this.grid.array[2][11].turnOn();
+		this.grid.array[1][13].turnOn();
+		this.grid.array[2][13].turnOn();
+		this.grid.array[3][13].turnOn();
+		this.grid.array[3][12].turnOn();
+		this.grid.array[2][11].turnOn();
 		
 		// //random pattern
 		// this.grid.array[4][3].turnOn();
@@ -41,47 +41,47 @@ class Game{
 		
 		//gosper glider gun
 
-		//block
-		this.grid.array[12][7].turnOn();
-		this.grid.array[13][7].turnOn();
-		this.grid.array[12][8].turnOn();
-		this.grid.array[13][8].turnOn();
+		// //block
+		// this.grid.array[12][7].turnOn();
+		// this.grid.array[13][7].turnOn();
+		// this.grid.array[12][8].turnOn();
+		// this.grid.array[13][8].turnOn();
 
-		//glider
-		this.grid.array[18][7].turnOn();
-		this.grid.array[18][8].turnOn();
-		this.grid.array[18][9].turnOn();
-		this.grid.array[19][9].turnOn();
-		this.grid.array[20][8].turnOn();
+		// //glider
+		// this.grid.array[18][7].turnOn();
+		// this.grid.array[18][8].turnOn();
+		// this.grid.array[18][9].turnOn();
+		// this.grid.array[19][9].turnOn();
+		// this.grid.array[20][8].turnOn();
 
-		//ship
-		this.grid.array[12][18].turnOn();
-		this.grid.array[13][18].turnOn();
-		this.grid.array[12][19].turnOn();	
-		this.grid.array[14][19].turnOn();
-		this.grid.array[13][20].turnOn();
-		this.grid.array[14][20].turnOn();
+		// //ship
+		// this.grid.array[12][18].turnOn();
+		// this.grid.array[13][18].turnOn();
+		// this.grid.array[12][19].turnOn();	
+		// this.grid.array[14][19].turnOn();
+		// this.grid.array[13][20].turnOn();
+		// this.grid.array[14][20].turnOn();
 
-		//glider	
-		this.grid.array[17][42].turnOn();
-		this.grid.array[18][41].turnOn();
-		this.grid.array[17][43].turnOn();
-		this.grid.array[18][42].turnOn();
-		this.grid.array[19][43].turnOn();
+		// //glider	
+		// this.grid.array[17][42].turnOn();
+		// this.grid.array[18][41].turnOn();
+		// this.grid.array[17][43].turnOn();
+		// this.grid.array[18][42].turnOn();
+		// this.grid.array[19][43].turnOn();
 
-		//ship
-		this.grid.array[11][29].turnOn();
-		this.grid.array[12][29].turnOn();		
-		this.grid.array[12][30].turnOn();
-		this.grid.array[10][30].turnOn();	
-		this.grid.array[10][31].turnOn();
-		this.grid.array[11][31].turnOn();
+		// //ship
+		// this.grid.array[11][29].turnOn();
+		// this.grid.array[12][29].turnOn();		
+		// this.grid.array[12][30].turnOn();
+		// this.grid.array[10][30].turnOn();	
+		// this.grid.array[10][31].turnOn();
+		// this.grid.array[11][31].turnOn();
 
-		//block
-		this.grid.array[10][41].turnOn();
-		this.grid.array[11][41].turnOn();
-		this.grid.array[10][42].turnOn();
-		this.grid.array[11][42].turnOn();
+		// //block
+		// this.grid.array[10][41].turnOn();
+		// this.grid.array[11][41].turnOn();
+		// this.grid.array[10][42].turnOn();
+		// this.grid.array[11][42].turnOn();
 
 		this.grid.draw();
 	 }
@@ -149,8 +149,9 @@ class Game{
 		let r, c, sum = 0;
 		for (r = 0; r < this.rows; r++) {
 			for (c = 0; c < this.columns; c++) {
-				if(this.grid.isOn(r,c))sum++
-
+				if(this.grid.isOn(r,c)){
+					sum++;
+				}
 			}
 		}
 		return sum;
@@ -176,28 +177,21 @@ class Game{
 		return count;
 	}
 
-	avgPosX(){
+	avgPos(){
 		let allX=0;
-		for(let j = 0; i<this.columns; i++){
-			for(let i = 0; j<this.rows; j++){
-				if(this.grid[j][i].isOn()){
-					allX+=i*this.cellsize;
-				}
-			}
-		}
-		return allX/cellsAlive();
-	}
-
-	avgPosY(){
 		let allY=0;
-		for(let j = 0; i<this.columns; i++){
-			for(let i = 0; j<this.rows; j++){
-				if(this.grid[j][i].isOn()){
-					allY+=j*this.cellsize;
+		for(let i = 0; i<this.rows; i++){
+			for(let j = 0; j<this.columns; j++){
+				if(this.grid.isOn(i, j)){
+					allX+=j;
+					allY+=i;
 				}
 			}
 		}
-		return allY/cellsAlive();
+		return {
+			x: allX/this.cellsAlive(),
+			y: allY/this.cellsAlive()
+		};
 	}
 
 	//this is the frame loop that executes every generation
@@ -208,9 +202,11 @@ class Game{
 		//updates the HTML elements
 		this.updateHTML();
 		this.plotter.initialize();
-		// draws the plotter
-		this.plotter.draw(this.frames, this.cellsAlive());
-		//this.plotter.draw(avgPosX(), avgPosY());
+		// draws the population-frames graph
+		this.plotter.drawPop(this.frames, this.cellsAlive());
+		// draws the position
+		var pos = this.avgPos();
+		this.plotter.drawPosition(4*pos.x, 4*pos.y);
 		//frame counter
 		this.frames++;
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
