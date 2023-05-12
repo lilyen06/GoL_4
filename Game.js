@@ -203,10 +203,10 @@ class Game{
 		this.updateHTML();
 		this.plotter.initialize();
 		// draws the population-frames graph
-		this.plotter.drawPop(this.frames, this.cellsAlive());
+		this.plotter.drawPop(this.frames, 2*this.cellsAlive());
 		// draws the position
 		var pos = this.avgPos();
-		this.plotter.drawPosition(4*pos.x, 4*pos.y);
+		this.plotter.drawPosition(4*pos.x, 8*pos.y);
 		//frame counter
 		this.frames++;
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
