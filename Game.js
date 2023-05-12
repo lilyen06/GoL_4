@@ -2,7 +2,13 @@ class Game{
 	//declaration of instance variables is optional, but good practice 
 	grid; rows; columns; cellsize; frames; running;toroidal;pattern;
 
-	//constructor is named as such and takes a similar form to that in Java
+	/**
+	 * constructor is named as such and takes a similar form to that in Java
+	 * @param {int} columns 
+	 * @param {int} rows 
+	 * @param {int} cellsize 
+	 * @param {boolean} toroidal 
+	 */
 	constructor(columns, rows, cellsize, toroidal){
 		this.columns = columns;
 		this.rows = rows;
@@ -14,7 +20,9 @@ class Game{
 
 	}
 
-	//intitiaizes the canvas
+	/**
+	 * intitiaizes the canvas
+	 */
 	initialize(){
 
 		// //glider -- in array coordinates array[y][x]
@@ -88,11 +96,20 @@ class Game{
 
 	 }
 
+	/**
+	 * initialize the canvas using a pattern parameter
+	 * @param {Pattern} pattern 
+	 */
 	initialize(pattern){
+		// generate and draw a pattern
 		this.pattern = pattern.randomize();
+		// update the grid
 		this.grid.draw();
 	}
 
+	/**
+	 * Draw the last pattern generated
+	 */
 	drawLastPat(){
 		let r, c;
 		for (r = 0; r < this.rows; r++) {
@@ -106,7 +123,9 @@ class Game{
 		this.grid.draw();
 	}
 
-	//start the frameLoop
+	/**
+	 * Start the frameLoop
+	 */
 	start(){
 		if(!this.running){
 			this.running = true;
@@ -114,11 +133,16 @@ class Game{
 		}	
 	}
 
-	//start the frameLoop
+	/**
+	 * Stop the frameloop
+	 */
 	stop(){
 		if(this.running)this.running = false;	
 	}
 
+	/**
+	 * Clear the screen (turn all cells off)
+	 */
 	clear(){
 		let r, c;
 		for (r = 0; r < this.rows; r++) {
@@ -130,13 +154,18 @@ class Game{
 		this.grid.draw();
 	}
 	
-	//updates the game with the new neighboes count
+	/**
+	 * updates the game with the new neighbors count
+	 */
 	update() {
 		let count = this.countNeighbors();
 		this.updateGrid(count);
 	}
 
-	//iterates through the entire grid and called updateCell on each cell
+	/**
+	 * iterates through the entire grid and called updateCell on each cell
+	 * @param {Array} counts 
+	 */
 	updateGrid(counts) {
 		let r, c;
 		for (r = 0; r < this.rows; r++) {
@@ -147,7 +176,11 @@ class Game{
 		}
 	}
 	
-	//implements the GoL logic provided a cell and its live count
+	/**
+	 * implements the GoL logic provided a cell and its live count
+	 * @param {Cell} cell 
+	 * @param {int} count 
+	 */
 	updateCell(cell, count) {
 		if (cell.isOn()) {
 			if (count < 2 || count > 3) {
@@ -161,8 +194,10 @@ class Game{
 	}
 	
 
-	 
-	//populates the counts[][] with the countAlive values
+	/**
+	 * populates the counts[][] with the countAlive values
+	 * @returns counts Array
+	 */
 	countNeighbors() {
 		let counts =  new Array(this.rows).fill(null).map(() => new Array(this.columns).fill(null));// builds an empty 2d array in JavaScript
 			//loops through our cell array and stores the counts of each cell in the int array
@@ -176,7 +211,10 @@ class Game{
 		return counts;
 	}
 
-	//return the number of cells alive in this update
+	/**
+	 * return the number of cells alive in this update
+	 * @returns sum of cells alive (int)
+	 */
 	cellsAlive(){
 		//loops through CellArray and sums all currently alive cells
 		let r, c, sum = 0;
@@ -189,13 +227,20 @@ class Game{
 		return sum;
 	} 
 
-	//helper function to update the html elements
+	/**
+	 * helper function to update the html elements
+	 */
 	updateHTML(){
 		document.getElementById("generation").innerHTML = "Cells alive: "+this.cellsAlive()+" Generation: "+this.frames;
 
 	}
 
-	//counts and returns the live cells in the 8 cell perimeter
+	/**
+	 * Counts and returns the live cells in the 8 cell perimeter
+	 * @param {int} r 
+	 * @param {int} c 
+	 * @returns int count
+	 */
 	countAlive(r, c) {
 		let count = 0;
 		count += this.grid.test(r - 1, c - 1);
@@ -209,12 +254,17 @@ class Game{
 		return count;
 	}
 
+	/**
+	 * clear the canvas, generate and draw a new random pattern
+	 */
 	reloop(){
 		this.clear();
 		this.initialize(new Pattern(6,5,conway,10));
 	}
 
-	//this is the frame loop that executes every generation
+	/**
+	 * this is the frame loop that executes every generation
+	 */
 	frameLoop(){
 		//frame update and draw
 		this.update();	 

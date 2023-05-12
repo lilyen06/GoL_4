@@ -2,7 +2,12 @@ class Cell{
 	//declaration of instance variables is optional, but good practice
 	x; y; size; state; colors; //hi
 
-	//constructor is named as such and takes a similar form to that in Java
+	/**
+	 * constructor is named as such and takes a similar form to that in Java
+	 * @param {int} x 
+	 * @param {int} y 
+	 * @param {int} size 
+	 */
 	constructor(x, y, size){
 		this.x = x;
 		this.y = y;
@@ -10,25 +15,37 @@ class Cell{
 		this.state = 0;
 		this.colors = ['white', 'black'];
 	}
-	//to turn on a cell
+	/**
+	 * turn on a cell (state = 1)
+	 */
 	turnOn(){
 		this.state =1;
 	}
-	//to turn off a cell
+	/**
+	 * turn off a cell (state = 0)
+	 */
 	turnOff(){
 		this.state =0;
 	}
-	//to turn on a cell
+	/**
+	 * tests if the cell is on, returns boolean
+	 * @returns boolean on
+	 */
 	isOn(){
 		if(this.state ==1) return true;
 		else return false;
 	}
-	//to turn off a cell
+	/**
+	 * tests if the cell is off, returns boolean
+	 * @returns boolean off
+	 */
 	isOff(){
 		if(this.state ==0) return true;
 		else return false;
 	}
-
+	/**
+	 * draws the outline and colour of the cell
+	 */
 	draw(){
 		//these lines return a reference to the HTML canvas element above
 		let can = document.querySelector("canvas");

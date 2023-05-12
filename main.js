@@ -6,7 +6,9 @@ var can = document.querySelector("canvas"); //reference to our canvas
 
 var mousedown = false;
 
-//main function is called on windowload event
+/**
+ * main function is called on windowload event
+ */
 window.addEventListener("load", function(event) {
 
 	//instantiate game (columns, rows, cellsize, toroidal overlap)
@@ -16,6 +18,9 @@ window.addEventListener("load", function(event) {
 
 });
 
+/**
+ * listen for a mouse click event
+ */
 can.addEventListener("mousedown", function(event){
 
 	updateCanvasCell(can, event, 1, conway.grid.columns, conway.grid.rows);
@@ -23,6 +28,9 @@ can.addEventListener("mousedown", function(event){
 
 });
 
+/**
+ * listen for the mouses movement
+ */
 can.addEventListener("mousemove", function(event){
 
 	if(mousedown)updateCanvasCell(can, event, 1, conway.grid.columns, conway.grid.rows);
@@ -30,6 +38,9 @@ can.addEventListener("mousemove", function(event){
 
 });
 
+/**
+ * listen for the end of a mouse click
+ */
 can.addEventListener("mouseup", function(event){
 
 	mousedown = false;
