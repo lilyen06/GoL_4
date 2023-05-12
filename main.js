@@ -11,7 +11,8 @@ window.addEventListener("load", function(event) {
 
 	//instantiate game (columns, rows, cellsize, toroidal overlap)
 	conway = new Game(50, 40, 7, false);
-	conway.initialize();
+	pattern = new Pattern(6,5,conway,10);
+	conway.initialize(pattern);
 
 });
 

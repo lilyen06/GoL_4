@@ -49,6 +49,10 @@
 		<p id="generation">Cells alive: 0 Generation : 0</p>
 		<button onclick="conway.start()">Start</button>
 		<button onclick="conway.stop()">Stop</button>
+		<button onclick="conway.initialize(new Pattern(6,5,conway,10))">Pattern</button>
+		<button onclick="conway.clear()">Clear</button>
+		<button onclick="conway.drawLastPat()">Draw last pattern</button>
+		<button onclick="conway.reloop()">reloop</button>
 
 	</footer>
 	
@@ -58,6 +62,6 @@
 	<script type="text/javascript" src="Cell.js"></script>
 	<script type="text/javascript" src="CellArray.js"></script>
 	<script type="text/javascript" src="Game.js"></script>
-	
+	<script type="text/javascript" src="Pattern.js"></script>
 
 </html>

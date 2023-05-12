@@ -1,12 +1,13 @@
 class Game{
 	//declaration of instance variables is optional, but good practice 
-	grid; rows; columns; cellsize; frames; running;
+	grid; rows; columns; cellsize; frames; running;toroidal;pattern;
 
 	//constructor is named as such and takes a similar form to that in Java
 	constructor(columns, rows, cellsize, toroidal){
 		this.columns = columns;
 		this.rows = rows;
 		this.cellsize = cellsize;
+		this.toroidal = toroidal;
 		this.grid = new CellArray(columns, rows, cellsize, toroidal); // builds the CellArray object
 		this.frames = 0;
 		this.running = false;
@@ -87,6 +88,24 @@ class Game{
 
 	 }
 
+	initialize(pattern){
+		this.pattern = pattern.randomize();
+		this.grid.draw();
+	}
+
+	drawLastPat(){
+		let r, c;
+		for (r = 0; r < this.rows; r++) {
+			for (c = 0; c < this.columns; c++) {
+				if (this.pattern.isOn(r,c)){
+					this.grid.turnOn(r,c);
+				}
+			}
+		}
+		this.frames = 0;
+		this.grid.draw();
+	}
+
 	//start the frameLoop
 	start(){
 		if(!this.running){
@@ -100,7 +119,16 @@ class Game{
 		if(this.running)this.running = false;	
 	}
 
-
+	clear(){
+		let r, c;
+		for (r = 0; r < this.rows; r++) {
+			for (c = 0; c < this.columns; c++) {
+				this.grid.turnOff(r, c);
+			}
+		}
+		this.frames = 0;
+		this.grid.draw();
+	}
 	
 	//updates the game with the new neighboes count
 	update() {
@@ -181,6 +209,11 @@ class Game{
 		return count;
 	}
 
+	reloop(){
+		this.clear();
+		this.initialize(new Pattern(6,5,conway,10));
+	}
+
 	//this is the frame loop that executes every generation
 	frameLoop(){
 		//frame update and draw
@@ -190,6 +223,9 @@ class Game{
 		this.updateHTML();
 		//frame counter
 		this.frames++;
+		if (this.frames > 100){
+			//this.reloop();
+		}
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
 		if(this.running)setTimeout(()=>window.requestAnimationFrame(()=>this.frameLoop()), 1000/60);
 
