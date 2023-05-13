@@ -2,6 +2,11 @@ class Plotter{
 	// declaration of variables
 	x; y; xAxis; yAxis;
 
+	/**
+	 * Construct a plotter object with assigned length of X and Y axes
+	 * @param {int} x 
+	 * @param {int} y 
+	 */
 	constructor(x,y){
 		this.x = x;
 		this.y = y;
@@ -9,6 +14,9 @@ class Plotter{
 		this.yAxis=135;
 	}
 
+	/**
+	 * Initializes the graph on the Generation Plotter canvas and draws the axes
+	 */
 	initialize(){
 		// a graph
 		var c = document.getElementById("graph");
@@ -35,6 +43,11 @@ class Plotter{
 		ctx.stroke();
 	}
 
+	/**
+	 * Plots the population of cells with respect to frames on the Generation Plotter axes
+	 * @param {int} x
+	 * @param {int} y
+	 */
 	drawPop(x, y){
 		//these lines return a reference to the HTML canvas element above
 		let can = document.getElementById("graph");
@@ -44,6 +57,11 @@ class Plotter{
 		ctx.fillRect(20+x, this.yAxis-y, 1, 1); //paints cells
 	}
 
+	/**
+	 * Plots the average position of all the cells on the Generation Plotter axes
+	 * @param {int} x 
+	 * @param {int} y 
+	 */
 	drawPosition(x, y){
 		//these lines return a reference to the HTML canvas element above
 		let can = document.getElementById("graph");
@@ -53,6 +71,9 @@ class Plotter{
 		ctx.fillRect(20+x, y, 1, 1); //paints cells
 	}
 
+	/**
+	 * Clears the plotted points on the Generation Plotter graph
+	 */
 	clear(){
 		let can = document.getElementById("graph");
 		let ctx = can.getContext('2d');
