@@ -52,4 +52,10 @@ class Plotter{
 		ctx.fillStyle = "red";
 		ctx.fillRect(20+x, y, 1, 1); //paints cells
 	}
+
+	clear(){
+		let can = document.getElementById("graph");
+		let ctx = can.getContext('2d');
+		ctx.clearRect(21, 0, 300, 133);
+	}
 }
