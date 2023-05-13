@@ -10,6 +10,7 @@ var mousedown = false;
 //main function is called on windowload event
 window.addEventListener("load", function(event) {
 
+	// creating and initializing a new plotter object
 	plotter = new Plotter(10, 10);
 	plotter.initialize();
 	//instantiate game (columns, rows, cellsize, toroidal overlap)

@@ -10,18 +10,18 @@ class Game{
 		this.grid = new CellArray(columns, rows, cellsize, toroidal); // builds the CellArray object
 		this.frames = 0;
 		this.running = false;
-		this.plotter = plotter;
+		this.plotter = plotter; // assigns a the parameter plotter to a new class variable called plotter
 	}
 
 	//intitiaizes the canvas
 	initialize(){
 
 		// //glider -- in array coordinates array[y][x]
-		this.grid.array[1][13].turnOn();
-		this.grid.array[2][13].turnOn();
-		this.grid.array[3][13].turnOn();
-		this.grid.array[3][12].turnOn();
-		this.grid.array[2][11].turnOn();
+		// this.grid.array[1][13].turnOn();
+		// this.grid.array[2][13].turnOn();
+		// this.grid.array[3][13].turnOn();
+		// this.grid.array[3][12].turnOn();
+		// this.grid.array[2][11].turnOn();
 		
 		// //random pattern
 		// this.grid.array[4][3].turnOn();
@@ -177,6 +177,7 @@ class Game{
 		return count;
 	}
 
+	// calculates the sum of all x and y position of the alive cells and returns the two averages
 	avgPos(){
 		let allX=0;
 		let allY=0;
@@ -189,6 +190,7 @@ class Game{
 			}
 		}
 		return {
+			// returns the average
 			x: allX/this.cellsAlive(),
 			y: allY/this.cellsAlive()
 		};
@@ -201,12 +203,15 @@ class Game{
 		this.grid.draw();
 		//updates the HTML elements
 		this.updateHTML();
+
+		// initialize a graph on the canvas
 		this.plotter.initialize();
-		// draws the population-frames graph
+		// plots the population-frames graph
 		this.plotter.drawPop(this.frames, 2*this.cellsAlive());
-		// draws the position
+		// plots the average position
 		var pos = this.avgPos();
-		this.plotter.drawPosition(4*pos.x, 8*pos.y);
+		this.plotter.drawPosition(4*pos.x, 8*pos.y); // blows up the values of (x, y) to help differentiate from the other graph
+
 		//frame counter
 		this.frames++;
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
