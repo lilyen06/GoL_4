@@ -177,7 +177,11 @@ class Game{
 		return count;
 	}
 
-	// calculates the sum of all x and y position of the alive cells and returns the two averages
+	/**
+	 * uses nested or loops to find the sum of all x and all y positions of alive cells
+	 * called as this.avgPos()
+	 * @returns the average value of the x and y position of all alive cells
+	 */
 	avgPos(){
 		let allX=0;
 		let allY=0;

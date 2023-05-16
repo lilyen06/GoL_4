@@ -4,6 +4,7 @@ class Plotter{
 
 	/**
 	 * Construct a plotter object with assigned length of X and Y axes
+	 * called as Plotter(int x, int y)
 	 * @param {int} x 
 	 * @param {int} y 
 	 */
@@ -17,6 +18,7 @@ class Plotter{
 
 	/**
 	 * Initializes the graph on the Generation Plotter canvas and draws the axes
+	 * called as plotter.initialize()
 	 */
 	initialize(){
 		// fetching the graph
@@ -46,6 +48,7 @@ class Plotter{
 
 	/**
 	 * Plots the population of cells with respect to frames on the Generation Plotter axes
+	 * called as plotter.drawPop(int x, int y)
 	 * @param {int} x
 	 * @param {int} y
 	 */
@@ -60,6 +63,7 @@ class Plotter{
 
 	/**
 	 * Plots the average position of all the cells on the Generation Plotter axes
+	 * called as plotter.drawPosition(int x, int y)
 	 * @param {int} x 
 	 * @param {int} y 
 	 */
@@ -75,6 +79,7 @@ class Plotter{
 
 	/**
 	 * Clears the plotted points on the Generation Plotter graph
+	 * called as plotter.clear()
 	 */
 	clear(){
 		// grabbing the reference to the Generation Plotter graph
