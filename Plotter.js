@@ -80,7 +80,7 @@ class Plotter{
 		// grabbing the reference to the Generation Plotter graph
 		let can = document.getElementById("graph");
 		let ctx = can.getContext('2d');
-		// clearing the area on the canvas starting at point (21, 0) and size (300, 133)
+		// clearing the entire canvas
 		ctx.clearRect(0, 0, 350, 234);
 	}
 }
