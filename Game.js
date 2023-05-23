@@ -113,12 +113,16 @@ class Game{
 	 * Draw the last pattern generated
 	 */
 	drawLastPat(){
+		this.drawPat(this.pattern);
+	}
+
+	drawPat(pattern){
 		let r, c;
 		// loop through all cells
 		for (r = 0; r < this.rows; r++) {
 			for (c = 0; c < this.columns; c++) {
 				// transcribe on pattern cells to grid pattern cells
-				if (this.pattern.isOn(r,c)){
+				if (pattern.isOn(r,c)){
 					this.grid.turnOn(r,c);
 				}
 			}
@@ -168,7 +172,7 @@ class Game{
 	 * updates the game with the new neighbors count
 	 */
 	update() {
-		let count = this.countNeighbors();
+		let count = this.grid.countNeighbors();
 		this.updateGrid(count);
 	}
 
@@ -202,66 +206,13 @@ class Game{
 				}
 		}
 	}
-  
-	/**
-	 * populates the counts[][] with the countAlive values
-	 * @returns counts Array
-	 */
-	countNeighbors() {
-		let counts =  new Array(this.rows).fill(null).map(() => new Array(this.columns).fill(null));// builds an empty 2d array in JavaScript
-			//loops through our cell array and stores the counts of each cell in the int array
-			let r, c; 
-			for (r = 0; r < this.rows; r++) {
-				for (c = 0; c < this.columns; c++) {
-					counts[r][c] = this.countAlive(r, c);
-				}
-
-			}
-		return counts;
-	}
-
-	/**
-	 * return the number of cells alive in this update
-	 * @returns sum of cells alive (int)
-	 */
-	cellsAlive(){
-		//loops through CellArray and sums all currently alive cells
-		let r, c, sum = 0;
-		for (r = 0; r < this.rows; r++) {
-			for (c = 0; c < this.columns; c++) {
-				if(this.grid.isOn(r,c)){
-					sum++;
-				}
-			}
-		}
-		return sum;
-	} 
 
 	/**
 	 * helper function to update the html elements
 	 */
 	updateHTML(){
-		document.getElementById("generation").innerHTML = "Cells alive: "+this.cellsAlive()+" Generation: "+this.frames;
+		document.getElementById("generation").innerHTML = "Cells alive: "+this.grid.cellsAlive()+" Generation: "+this.frames;
 
-	}
-
-	/**
-	 * Counts and returns the live cells in the 8 cell perimeter
-	 * @param {int} r 
-	 * @param {int} c 
-	 * @returns int count
-	 */
-	countAlive(r, c) {
-		let count = 0;
-		count += this.grid.test(r - 1, c - 1);
-		count += this.grid.test(r - 1, c);
-		count += this.grid.test(r - 1, c + 1);
-		count += this.grid.test(r, c - 1);
-		count += this.grid.test(r, c + 1);
-		count += this.grid.test(r + 1, c - 1);
-		count += this.grid.test(r + 1, c);
-		count += this.grid.test(r + 1, c + 1);
-		return count;
 	}
 
 	/**
@@ -282,8 +233,8 @@ class Game{
 		}
 		return {
 			// returns the average
-			x: allX/this.cellsAlive(),
-			y: allY/this.cellsAlive()
+			x: allX/this.grid.cellsAlive(),
+			y: allY/this.grid.cellsAlive()
 		};
 	}
   
@@ -308,7 +259,7 @@ class Game{
 		// initialize a graph on the canvas
 		this.plotter.initialize();
 		// plots the population-frames graph
-		this.plotter.drawPop(this.frames, 2*this.cellsAlive());
+		this.plotter.drawPop(this.frames, 2*this.grid.cellsAlive());
 		// plots the average position
 		var pos = this.avgPos();
 		this.plotter.drawPosition(4*pos.x, 8*pos.y); // blows up the values of (x, y) to help differentiate from the other graph

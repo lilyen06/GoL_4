@@ -33,6 +33,59 @@ class CellArray{
 	};
 
 	/**
+	 * populates the counts[][] with the countAlive values
+	 * @returns counts Array
+	 */
+	countNeighbors() {
+		let counts =  new Array(this.rows).fill(null).map(() => new Array(this.columns).fill(null));// builds an empty 2d array in JavaScript
+			//loops through our cell array and stores the counts of each cell in the int array
+			let r, c; 
+			for (r = 0; r < this.rows; r++) {
+				for (c = 0; c < this.columns; c++) {
+					counts[r][c] = this.countAlive(r, c);
+				}
+
+			}
+		return counts;
+	}
+
+	/**
+	 * return the number of cells alive in this update
+	 * @returns sum of cells alive (int)
+	 */
+	cellsAlive(){
+		//loops through CellArray and sums all currently alive cells
+		let r, c, sum = 0;
+		for (r = 0; r < this.rows; r++) {
+			for (c = 0; c < this.columns; c++) {
+				if(this.isOn(r,c)){
+					sum++;
+				}
+			}
+		}
+		return sum;
+	} 
+
+	/**
+	 * Counts and returns the live cells in the 8 cell perimeter
+	 * @param {int} r 
+	 * @param {int} c 
+	 * @returns int count
+	 */
+	countAlive(r, c) {
+		let count = 0;
+		count += this.test(r - 1, c - 1);
+		count += this.test(r - 1, c);
+		count += this.test(r - 1, c + 1);
+		count += this.test(r, c - 1);
+		count += this.test(r, c + 1);
+		count += this.test(r + 1, c - 1);
+		count += this.test(r + 1, c);
+		count += this.test(r + 1, c + 1);
+		return count;
+	}
+
+	/**
 	 * Draws each cell in the CellArray
 	 */
 	draw(){
