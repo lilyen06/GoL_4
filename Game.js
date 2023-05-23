@@ -320,7 +320,7 @@ class Game{
 		this.frames++;
 		
 		if (this.frames >= 24) {
-			this.stop();
+			//this.stop();
 			//this.reloop(); // uncomment for automatic relooping
 			// this.data.storeFrames(this.frames);
 		}
