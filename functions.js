@@ -1,4 +1,10 @@
-//Reads mouse pointer position on parameter canvas and returns point object, 
+/**
+ * Reads mouse pointer position on parameter canvas and returns point object
+ * @param {Canvas} canvas 
+ * @param {int} borderwidth 
+ * @param {Event} event 
+ * @returns 
+ */
 function getMousePos(canvas, borderwidth, event) {
     //for mouse x, y coordinates
     var x,y;
@@ -12,7 +18,14 @@ function getMousePos(canvas, borderwidth, event) {
 }
 
 var lastCellX, lastCellY;
-//Updates instance variables cellX and cellY with cell position
+/**
+ * Updates instance variables cellX and cellY with cell position
+ * @param {Canvas} canvas 
+ * @param {Event} event 
+ * @param {iny} borderwidth 
+ * @param {int} resolutionX 
+ * @param {int} resolutionY 
+ */
 function updateCanvasCell(canvas, event, borderwidth, resolutionX, resolutionY){
 	var mousePos = getMousePos(canvas, borderwidth, event);
 
