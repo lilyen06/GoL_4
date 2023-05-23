@@ -158,6 +158,7 @@ class Game{
 		// reset operator interface
 		this.frames = 0;
 		this.grid.draw();
+		this.plotter.clear();
 	}
 	
 	/**
