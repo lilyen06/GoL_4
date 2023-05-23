@@ -2,7 +2,13 @@ class CellArray{
 	//declaration of instance variables is optional, but good practice 
 	array; rows; columns; cellsize;
 
-	//constructor is named as such and takes a similar form to that in Java
+	/**
+	 * constructor is named as such and takes a similar form to that in Java
+	 * @param {int} columns 
+	 * @param {int} rows 
+	 * @param {int} cellsize 
+	 * @param {boolean} toroidal 
+	 */
 	constructor(columns, rows, cellsize, toroidal){
 		this.columns = columns;
 		this.rows = rows;
@@ -26,6 +32,9 @@ class CellArray{
 		}
 	};
 
+	/**
+	 * Draws each cell in the CellArray
+	 */
 	draw(){
 		let r, c; //calls draw method of each Cell in 2d array
 		for(r=0; r<this.rows; r++){
@@ -35,27 +44,51 @@ class CellArray{
 		}
 	};
 
-	//cell getter
+	/**
+	 * Cell getter, takes rows and columns as parameters
+	 * @param {int} r 
+	 * @param {int} c 
+	 * @returns Cell
+	 */
 	getCell(r, c) {
 		return this.array[r][c];
 	}
 	
-	//cell setter
+	/**
+	 * Turns on a cell at row r and column c
+	 * @param {int} r 
+	 * @param {int} c 
+	 */
 	turnOn(r, c) {
 		this.array[r][c].turnOn();
 	}
 
-	//cell setter
+	/**
+	 * Turns off a cell at row r and column c
+	 * @param {int} r 
+	 * @param {int} c 
+	 */
 	turnOff(r, c) {
 		this.array[r][c].turnOff();
 	}
 
 	//cell checker
+	/**
+	 * Checks if the cell at row r and column c is on
+	 * @param {int} r 
+	 * @param {int} c 
+	 * @returns boolean
+	 */
 	isOn(r, c) {
 		return this.array[r][c].isOn();
 	}
 
-	//test returns 0 for cells outside the array it cannot find
+	/**
+	 * test returns 0 for cells outside the array it cannot find
+	 * @param {int} r 
+	 * @param {int} c 
+	 * @returns 0 or 1
+	 */
 	test(r, c) {
 			
 		 try {
