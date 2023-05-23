@@ -319,11 +319,11 @@ class Game{
 
 		this.frames++;
 		
-		// if (this.frames >= 24) {
+		 if (this.frames >= 100) {
 		// 	//this.stop();
 		// 	//this.reloop(); // uncomment for automatic relooping
 		// 	// this.data.storeFrames(this.frames);
-		// }
+		}
 		
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
 		if(this.running)setTimeout(()=>window.requestAnimationFrame(()=>this.frameLoop()), 1000/24);
