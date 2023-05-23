@@ -116,6 +116,12 @@ class Game{
 		this.drawPat(this.pattern);
 	}
 
+	mutateLast(){
+		let mutator = new Mutator(this);
+		let pat = mutator.moveLonely(this.pattern);
+		this.drawPat(pat);
+	}
+
 	drawPat(pattern){
 		let r, c;
 		// loop through all cells
