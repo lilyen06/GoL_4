@@ -1,6 +1,7 @@
 "use strict;" 
 
 var conway;//must be declared in the global scope to be accessed via HTML onclick attibute
+var plotter;
 
 var can = document.querySelector("canvas"); //reference to our canvas
 
@@ -11,8 +12,11 @@ var mousedown = false;
  */
 window.addEventListener("load", function(event) {
 
+	// creating and initializing a new plotter object
+	plotter = new Plotter(10, 10);
+	plotter.initialize();
 	//instantiate game (columns, rows, cellsize, toroidal overlap)
-	conway = new Game(50, 40, 7, false);
+	conway = new Game(50, 40, 7, false, plotter);
 	pattern = new Pattern(6,5,conway,10);
 	conway.initialize(pattern);
 

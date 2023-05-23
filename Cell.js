@@ -48,7 +48,7 @@ class Cell{
 	 */
 	draw(){
 		//these lines return a reference to the HTML canvas element above
-		let can = document.querySelector("canvas");
+		let can = document.getElementById("life");
 		let ctx = can.getContext('2d');
 		//all painting to the canvas is done to the canvas context object
 		ctx.fillStyle = this.colors[this.state];

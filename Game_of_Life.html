@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--yo-->
 <!--HTML ROOT ELEMENT-->
 <html>
 
@@ -26,7 +25,7 @@
 			<a href = "https://www.w3schools.com/jsref/default.asp">JavaScript Reference</a>
 			<a href = "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript">JavaScript Classes Tutorial</a>
 			<br><!--this is a line break tag-->
-			<canvas>Update your browser to display the canvas.</canvas>
+			<canvas id="life">Update your browser to display the canvas.</canvas>
 		</div>
 		<!--RIGHT COLUMN 5/12 WIDE-->
 		<div class = "w3-col s5">
@@ -34,7 +33,7 @@
 			<a href = "https://www.w3schools.com/w3css/w3css_responsive.asp">w3.css Reference</a>
 			<a href = "https://www.w3schools.com/js/js_graphics_canvas.asp">JavaScript Canvas Tutorial</a>
 			<br><!--this is a line break tag-->
-			<canvas>Update your browser to display the canvas.</canvas>
+			<canvas id="graph" style="width:100%;max-width:700px">Update your browser to display the canvas.</canvas>
 		</div>
 		<!--RIGHT MARGIN 1/12 WIDE-->
 		<div class = "w3-col s1"><p> </p></div>
@@ -49,6 +48,7 @@
 		<p id="generation">Cells alive: 0 Generation : 0</p>
 		<button onclick="conway.start()">Start</button>
 		<button onclick="conway.stop()">Stop</button>
+		<button onclick="plotter.clear()">Clear</button>
 		<button onclick="conway.initialize(new Pattern(6,5,conway,10))">Pattern</button>
 		<button onclick="conway.clear()">Clear</button>
 		<button onclick="conway.drawLastPat()">Draw last pattern</button>
@@ -62,6 +62,7 @@
 	<script type="text/javascript" src="Cell.js"></script>
 	<script type="text/javascript" src="CellArray.js"></script>
 	<script type="text/javascript" src="Game.js"></script>
+	<script type="text/javascript" src="Plotter.js"></script>
 	<script type="text/javascript" src="Pattern.js"></script>
 
 </html>

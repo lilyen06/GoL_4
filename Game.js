@@ -9,7 +9,7 @@ class Game{
 	 * @param {int} cellsize 
 	 * @param {boolean} toroidal 
 	 */
-	constructor(columns, rows, cellsize, toroidal){
+	constructor(columns, rows, cellsize, toroidal, plotter){
 		this.columns = columns;
 		this.rows = rows;
 		this.cellsize = cellsize;
@@ -17,7 +17,7 @@ class Game{
 		this.grid = new CellArray(columns, rows, cellsize, toroidal); // builds the CellArray object
 		this.frames = 0;
 		this.running = false;
-
+		this.plotter = plotter; // assigns a the parameter plotter to a new class variable called plotter
 	}
 
 	/**
@@ -50,50 +50,49 @@ class Game{
 		
 		//gosper glider gun
 
-		//block
-		this.grid.array[12][7].turnOn();
-		this.grid.array[13][7].turnOn();
-		this.grid.array[12][8].turnOn();
-		this.grid.array[13][8].turnOn();
+		// //block
+		// this.grid.array[12][7].turnOn();
+		// this.grid.array[13][7].turnOn();
+		// this.grid.array[12][8].turnOn();
+		// this.grid.array[13][8].turnOn();
 
-		//glider
-		this.grid.array[18][7].turnOn();
-		this.grid.array[18][8].turnOn();
-		this.grid.array[18][9].turnOn();
-		this.grid.array[19][9].turnOn();
-		this.grid.array[20][8].turnOn();
+		// //glider
+		// this.grid.array[18][7].turnOn();
+		// this.grid.array[18][8].turnOn();
+		// this.grid.array[18][9].turnOn();
+		// this.grid.array[19][9].turnOn();
+		// this.grid.array[20][8].turnOn();
 
-		//ship
-		this.grid.array[12][18].turnOn();
-		this.grid.array[13][18].turnOn();
-		this.grid.array[12][19].turnOn();	
-		this.grid.array[14][19].turnOn();
-		this.grid.array[13][20].turnOn();
-		this.grid.array[14][20].turnOn();
+		// //ship
+		// this.grid.array[12][18].turnOn();
+		// this.grid.array[13][18].turnOn();
+		// this.grid.array[12][19].turnOn();	
+		// this.grid.array[14][19].turnOn();
+		// this.grid.array[13][20].turnOn();
+		// this.grid.array[14][20].turnOn();
 
-		//glider	
-		this.grid.array[17][42].turnOn();
-		this.grid.array[18][41].turnOn();
-		this.grid.array[17][43].turnOn();
-		this.grid.array[18][42].turnOn();
-		this.grid.array[19][43].turnOn();
+		// //glider	
+		// this.grid.array[17][42].turnOn();
+		// this.grid.array[18][41].turnOn();
+		// this.grid.array[17][43].turnOn();
+		// this.grid.array[18][42].turnOn();
+		// this.grid.array[19][43].turnOn();
 
-		//ship
-		this.grid.array[11][29].turnOn();
-		this.grid.array[12][29].turnOn();		
-		this.grid.array[12][30].turnOn();
-		this.grid.array[10][30].turnOn();	
-		this.grid.array[10][31].turnOn();
-		this.grid.array[11][31].turnOn();
+		// //ship
+		// this.grid.array[11][29].turnOn();
+		// this.grid.array[12][29].turnOn();		
+		// this.grid.array[12][30].turnOn();
+		// this.grid.array[10][30].turnOn();	
+		// this.grid.array[10][31].turnOn();
+		// this.grid.array[11][31].turnOn();
 
-		//block
-		this.grid.array[10][41].turnOn();
-		this.grid.array[11][41].turnOn();
-		this.grid.array[10][42].turnOn();
-		this.grid.array[11][42].turnOn();
+		// //block
+		// this.grid.array[10][41].turnOn();
+		// this.grid.array[11][41].turnOn();
+		// this.grid.array[10][42].turnOn();
+		// this.grid.array[11][42].turnOn();
 
 		this.grid.draw();
-
 	 }
 
 	/**
@@ -132,7 +131,7 @@ class Game{
 	start(){
 		if(!this.running){
 			this.running = true;
-			window.requestAnimationFrame(()=>this.frameLoop());	
+			window.requestAnimationFrame(()=>this.frameLoop());
 		}	
 	}
 
@@ -142,6 +141,7 @@ class Game{
 	stop(){
 		if(this.running)this.running = false;	
 	}
+
 
 	/**
 	 * Clear the screen (turn all cells off)
@@ -198,8 +198,7 @@ class Game{
 				}
 		}
 	}
-	
-
+  
 	/**
 	 * populates the counts[][] with the countAlive values
 	 * @returns counts Array
@@ -226,8 +225,9 @@ class Game{
 		let r, c, sum = 0;
 		for (r = 0; r < this.rows; r++) {
 			for (c = 0; c < this.columns; c++) {
-				if(this.grid.isOn(r,c))sum++
-
+				if(this.grid.isOn(r,c)){
+					sum++;
+				}
 			}
 		}
 		return sum;
@@ -261,6 +261,29 @@ class Game{
 	}
 
 	/**
+   * uses nested or loops to find the sum of all x and all y positions of alive cells
+	 * called as this.avgPos()
+	 * @returns the average value of the x and y position of all alive cells
+	 */
+	avgPos(){
+		let allX=0;
+		let allY=0;
+		for(let i = 0; i<this.rows; i++){
+			for(let j = 0; j<this.columns; j++){
+				if(this.grid.isOn(i, j)){
+					allX+=j;
+					allY+=i;
+				}
+			}
+		}
+		return {
+			// returns the average
+			x: allX/this.cellsAlive(),
+			y: allY/this.cellsAlive()
+		};
+	}
+  
+  /*
 	 * clear the canvas, generate and draw a new random pattern
 	 */
 	reloop(){
@@ -277,13 +300,22 @@ class Game{
 		this.grid.draw();
 		//updates the HTML elements
 		this.updateHTML();
+
+		// initialize a graph on the canvas
+		this.plotter.initialize();
+		// plots the population-frames graph
+		this.plotter.drawPop(this.frames, 2*this.cellsAlive());
+		// plots the average position
+		var pos = this.avgPos();
+		this.plotter.drawPosition(4*pos.x, 8*pos.y); // blows up the values of (x, y) to help differentiate from the other graph
+
 		//frame counter
 		this.frames++;
 		if (this.frames > 100){
 			//this.reloop(); // uncomment for automatic relooping
 		}
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
-		if(this.running)setTimeout(()=>window.requestAnimationFrame(()=>this.frameLoop()), 1000/60);
+		if(this.running)setTimeout(()=>window.requestAnimationFrame(()=>this.frameLoop()), 1000/24);
 
 	}
 
