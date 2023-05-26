@@ -171,4 +171,27 @@ class CellArray{
 		return 0;
 	}
 
+	/**
+     * uses nested for loops to find the sum of all x and all y positions of alive cells
+	 * called as this.avgPos()
+	 * @returns the average value of the x and y position of all alive cells
+	 */
+	avgPos(){
+		let allX=0;
+		let allY=0;
+		for(let i = 0; i<this.rows; i++){
+			for(let j = 0; j<this.columns; j++){
+				if(this.isOn(i, j)){
+					allX+=j;
+					allY+=i;
+				}
+			}
+		}
+		return {
+			// returns the average
+			x: allX/this.cellsAlive(),
+			y: allY/this.cellsAlive()
+		};
+	}
+
 }

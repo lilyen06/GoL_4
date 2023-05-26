@@ -220,29 +220,6 @@ class Game{
 		document.getElementById("generation").innerHTML = "Cells alive: "+this.grid.cellsAlive()+" Generation: "+this.frames;
 
 	}
-
-	/**
-   * uses nested or loops to find the sum of all x and all y positions of alive cells
-	 * called as this.avgPos()
-	 * @returns the average value of the x and y position of all alive cells
-	 */
-	avgPos(){
-		let allX=0;
-		let allY=0;
-		for(let i = 0; i<this.rows; i++){
-			for(let j = 0; j<this.columns; j++){
-				if(this.grid.isOn(i, j)){
-					allX+=j;
-					allY+=i;
-				}
-			}
-		}
-		return {
-			// returns the average
-			x: allX/this.grid.cellsAlive(),
-			y: allY/this.grid.cellsAlive()
-		};
-	}
   
   /*
 	 * clear the canvas, generate and draw a new random pattern
@@ -267,7 +244,7 @@ class Game{
 		// plots the population-frames graph
 		this.plotter.drawPop(this.frames, 2*this.grid.cellsAlive());
 		// plots the average position
-		var pos = this.avgPos();
+		var pos = this.grid.avgPos();
 		this.plotter.drawPosition(4*pos.x, 8*pos.y); // blows up the values of (x, y) to help differentiate from the other graph
 
 		this.data.storeFrames(this.frames);

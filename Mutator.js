@@ -7,6 +7,32 @@ class Mutator{
 
     /**
      * 
+     * @param {int} rows
+     * @param {int} cols
+     * @param {CellArray} pattern 
+     */
+    differences(rows, cols, pattern){
+        let x=0;
+        let y=0;
+        var xy = pattern.avgPos();
+        if (rows<xy.y){
+            y=1;
+        } else if (rows>xy.y){
+            y=-1;
+        } if (cols<xy.x){
+            x=1;
+        } else if (cols>xy.x){
+            x=-1;
+        }
+        return {
+			// returns the differences
+			x: x,
+			y: y
+		};
+    }
+
+    /**
+     * Move the cell with the least amount of neighbour towards the average position point
      * @param {CellArray} pattern 
      */
     moveLonely(pattern){
@@ -15,8 +41,9 @@ class Mutator{
         let countsleast = -1;
         let rows;
         let cols;
-        for (let r=0; r<=pattern.rows; r++){
-            for (let c=0; c<=pattern.columns; c++) {
+        for (let r=0; r<=pattern.rows-1; r++){
+            for (let c=0; c<=pattern.columns-1; c++) {
+                console.log(r+"          "+c);
                 if (pattern.isOn(r,c)){
                     countstemp = counts[r][c];
                     if (countsleast==-1){
@@ -33,10 +60,9 @@ class Mutator{
                 }
             }
         }
-        let xdif = 1;
-        let ydif = 1;
+        var xy = this.differences(rows,cols,pattern);
         pattern.turnOff(rows,cols);
-        pattern.turnOff(rows+ydif,cols+xdif);
+        pattern.turnOn(rows+xy.y,cols+xy.x);
         return pattern;
     }
 }
