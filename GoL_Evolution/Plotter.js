@@ -73,7 +73,7 @@ class Plotter{
 		let ctx = can.getContext('2d');
 		//all painting to the canvas is done to the canvas context object
 		ctx.fillStyle = "red"; // plotted points are red to differentiate from the other graph
-		ctx.fillRect(20+x, y, 1, 1); //paints cells at te xy coordinates given by the parameter
+		ctx.fillRect(20+x, y+30, 3, 3); //paints cells at te xy coordinates given by the parameter
 		// the y-value passed to fillRect remains to be y because the percieved directionality flips
 	}
 

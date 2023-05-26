@@ -26,7 +26,7 @@ class DataSet {
             let ColumnSum = 0;
             // Game.frameloop();
             var i,j;
-            console.log(this.rows);
+            //console.log(this.rows);
             for (i = 0; i < this.rows; i++) {
                 for (j = 0; j < this.columns; j++) {
                     if (this.cellArray.isOn(i,j)) {
