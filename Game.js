@@ -119,8 +119,10 @@ class Game{
 	mutateLast(){
 		this.clear();
 		let mutator = new Mutator(this);
-		let pat = mutator.moveLonely(this.pattern);
-		this.drawPat(pat);
+		//this.pattern = mutator.moveLonely(this.pattern);
+		//this.pattern = mutator.addPoint(this.pattern);
+		this.pattern = mutator.killPoint(this.pattern);
+		this.drawPat(this.pattern);
 	}
 
 	drawPat(pattern){

@@ -34,6 +34,7 @@ class Mutator{
     /**
      * Move the cell with the least amount of neighbour towards the average position point
      * @param {CellArray} pattern 
+     * @returns pattern CellArray
      */
     moveLonely(pattern){
         let counts = pattern.countNeighbors();
@@ -63,6 +64,59 @@ class Mutator{
         var xy = this.differences(rows,cols,pattern);
         pattern.turnOff(rows,cols);
         pattern.turnOn(rows+xy.y,cols+xy.x);
+        return pattern;
+    }
+
+    /**
+     * add a point near to the average position
+     * @param {CellArray} pattern 
+     * @returns pattern CellArray
+     */
+    addPoint(pattern){
+        var xy = pattern.avgPos();
+        let x = Math.floor(xy.x);
+        let y = Math.floor(xy.y);
+        while (pattern.isOn(y,x)){
+            if (x>y){
+                y++;
+            } else {
+                x++;
+            }
+        }
+        pattern.turnOn(y,x);
+        return pattern;
+    }
+
+    /**
+     * remove a point near to the average position
+     * @param {CellArray} pattern 
+     * @returns pattern CellArray
+     */
+    killPoint(pattern){
+        var xy = pattern.avgPos();
+        let x = Math.floor(xy.x);
+        let y = Math.floor(xy.y);
+        let num = 0;
+        let square = true;
+        while (!pattern.isOn(y,x)&&square){
+            if (num==0)x++;
+            if (num==1)y++;
+            if (num==3)x--;
+            if (num==4)x--;
+            if (num==5)y--;
+            if (num==6)y--;
+            if (num==7)x++;
+            if (num==8)x++;
+            if (num>8){
+                square = false;
+            }
+            num++;
+        }
+        if (square){
+            pattern.turnOff(y,x);
+        } else {
+            this.addPoint();
+        }
         return pattern;
     }
 }
