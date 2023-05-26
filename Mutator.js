@@ -6,7 +6,7 @@ class Mutator{
     }
 
     /**
-     * 
+     * Return the differences between the average position and the point given
      * @param {int} rows
      * @param {int} cols
      * @param {CellArray} pattern 

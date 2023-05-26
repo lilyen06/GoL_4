@@ -117,6 +117,7 @@ class Game{
 	}
 
 	mutateLast(){
+		this.clear();
 		let mutator = new Mutator(this);
 		let pat = mutator.moveLonely(this.pattern);
 		this.drawPat(pat);
@@ -245,7 +246,7 @@ class Game{
 		this.plotter.drawPop(this.frames, 2*this.grid.cellsAlive());
 		// plots the average position
 		var pos = this.grid.avgPos();
-		this.plotter.drawPosition(4*pos.x, 8*pos.y); // blows up the values of (x, y) to help differentiate from the other graph
+		this.plotter.drawPosition(pos.x, pos.y);
 
 		this.data.storeFrames(this.frames);
 		this.data.array[this.frames][0] = this.data.collectPop();
