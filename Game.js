@@ -1,6 +1,6 @@
 class Game{
 	//declaration of instance variables is optional, but good practice 
-	grid; rows; columns; cellsize; frames; running;toroidal;pattern;
+	grid; rows; columns; cellsize; frames; running;toroidal;pattern;mutated;
 
 	/**
 	 * constructor is named as such and takes a similar form to that in Java
@@ -58,6 +58,38 @@ class Game{
 		//this.pattern = mutator.addPoint(this.pattern);
 		this.pattern = mutator.killPoint(this.pattern);
 		this.drawPat(this.pattern);
+	}
+
+	/**
+	 * Mutate and reloop the pattern until isolating one with a constant population and changing position
+	 * @param {int} frames
+	 */
+	mutate(frames){
+		this.clear();
+		this.drawLastPat();
+		let mutator = new Mutator(this);
+		while(this.frames<frames){}
+		if (Selector.dismiss(5,5)||mutated>=5){
+			this.reloop();
+			this.mutated = 0;
+			this.mutate();
+		} else if (Selector.good(5,5)){
+			if (!Selector.good(0,0)){
+				this.pattern = mutator.moveLonely(this.pattern);
+				this.mutated++;
+				this.mutate();
+			} else {
+				this.drawLastPat();
+			}
+		} else if (Selector.chaos(5,5)){
+			if (this.mutated <=3){
+				this.pattern = mutator.addPoint(this.pattern);
+				this.mutated++;
+			} else {
+				this.pattern = mutator.killPoint(this.pattern);
+				this.mutated++;
+			}
+		}
 	}
 
 	/**
@@ -196,9 +228,7 @@ class Game{
 		this.frames++;
 		
 		 if (this.frames >= 100) {
-		 	this.stop();
-		// 	//this.reloop(); // uncomment for automatic relooping
-		// 	// this.data.storeFrames(this.frames);
+		 	this.mutate(this.frames);
 		}
 		
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
