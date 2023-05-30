@@ -11,7 +11,7 @@ class Game{
 	 * @param {dataSet} data
 	 * @param {plotter} plotter
 	 */
-	constructor(columns, rows, cellsize, toroidal, data, plotter){
+	constructor(columns, rows, cellsize, toroidal, data, plotter, evolve){
 		this.columns = columns;
 		this.rows = rows;
 		this.cellsize = cellsize;
@@ -21,6 +21,7 @@ class Game{
 		this.running = false;
 		this.data = data;
 		this.plotter = plotter; // assigns a the parameter plotter to a new class variable called plotter
+		this.evolve = evolve;
 	}
 
 	/**
@@ -162,6 +163,10 @@ class Game{
 		this.frames = 0;
 		this.grid.draw();
 		this.plotter.clear();
+	}
+
+	nextTrial(){
+		this.clear();
 	}
 	
 	/**
