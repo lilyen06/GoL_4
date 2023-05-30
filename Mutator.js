@@ -1,6 +1,10 @@
 class Mutator{
     conway;
 
+    /**
+     * instantiates mutator
+     * @param {Game} conway 
+     */
     constructor(conway){
         this.conway = conway;
     }

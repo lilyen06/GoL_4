@@ -27,74 +27,6 @@ class Game{
 	 * intitiaizes the canvas
 	 */
 	initialize(){
-
-		// //glider -- in array coordinates array[y][x]
-		// this.grid.array[1][13].turnOn();
-		// this.grid.array[2][13].turnOn();
-		// this.grid.array[3][13].turnOn();
-		// this.grid.array[3][12].turnOn();
-		// this.grid.array[2][11].turnOn();
-		
-		// //random pattern
-		// this.grid.array[4][3].turnOn();
-		// this.grid.array[4][2].turnOn();
-		// this.grid.array[2][4].turnOn();
-		// this.grid.array[4][2].turnOn();
-		// this.grid.array[5][1].turnOn();
-		// this.grid.array[6][3].turnOn();
-		// this.grid.array[6][2].turnOn();
-		// this.grid.array[6][4].turnOn();
-		// this.grid.array[7][4].turnOn();
-		// this.grid.array[8][4].turnOn();
-		// this.grid.array[9][4].turnOn();
-		// this.grid.array[10][4].turnOn();
-		// this.grid.array[11][4].turnOn();
-		// this.grid.array[12][4].turnOn();
-		
-		//gosper glider gun
-
-		// //block
-		// this.grid.array[12][7].turnOn();
-		// this.grid.array[13][7].turnOn();
-		// this.grid.array[12][8].turnOn();
-		// this.grid.array[13][8].turnOn();
-
-		// //glider
-		// this.grid.array[18][7].turnOn();
-		// this.grid.array[18][8].turnOn();
-		// this.grid.array[18][9].turnOn();
-		// this.grid.array[19][9].turnOn();
-		// this.grid.array[20][8].turnOn();
-
-		// //ship
-		// this.grid.array[12][18].turnOn();
-		// this.grid.array[13][18].turnOn();
-		// this.grid.array[12][19].turnOn();	
-		// this.grid.array[14][19].turnOn();
-		// this.grid.array[13][20].turnOn();
-		// this.grid.array[14][20].turnOn();
-
-		// //glider	
-		// this.grid.array[17][42].turnOn();
-		// this.grid.array[18][41].turnOn();
-		// this.grid.array[17][43].turnOn();
-		// this.grid.array[18][42].turnOn();
-		// this.grid.array[19][43].turnOn();
-
-		// //ship
-		// this.grid.array[11][29].turnOn();
-		// this.grid.array[12][29].turnOn();		
-		// this.grid.array[12][30].turnOn();
-		// this.grid.array[10][30].turnOn();	
-		// this.grid.array[10][31].turnOn();
-		// this.grid.array[11][31].turnOn();
-
-		// //block
-		// this.grid.array[10][41].turnOn();
-		// this.grid.array[11][41].turnOn();
-		// this.grid.array[10][42].turnOn();
-		// this.grid.array[11][42].turnOn();
-
 		this.grid.draw();
 	 }
 
@@ -116,6 +48,9 @@ class Game{
 		this.drawPat(this.pattern);
 	}
 
+	/**
+	 * mutates the last pattern generated
+	 */
 	mutateLast(){
 		this.clear();
 		let mutator = new Mutator(this);
@@ -125,6 +60,10 @@ class Game{
 		this.drawPat(this.pattern);
 	}
 
+	/**
+	 * Draws the pattern fed into the function
+	 * @param {CellArray} pattern 
+	 */
 	drawPat(pattern){
 		let r, c;
 		// loop through all cells
