@@ -80,6 +80,7 @@ class Game{
 				this.mutate();
 			} else {
 				this.drawLastPat();
+				this.stop();
 			}
 		} else if (Selector.chaos(5,5)){
 			if (this.mutated <=3){
@@ -226,7 +227,6 @@ class Game{
 		this.data.populateArray();
 
 		this.frames++;
-		
 		 if (this.frames >= 100) {
 		 	this.mutate(this.frames);
 		}
