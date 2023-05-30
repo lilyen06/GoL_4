@@ -115,7 +115,7 @@ class Mutator{
         if (square){
             pattern.turnOff(y,x);
         } else {
-            this.addPoint();
+            this.addPoint(pattern);
         }
         return pattern;
     }
