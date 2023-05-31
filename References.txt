@@ -1,0 +1,41 @@
+Syntax:
+    Description: 
+    Paramaters:
+    Return:
+
+Cell functions:
+
+
+CellArray functions:
+
+
+DataSet functions:
+
+
+functions functions:
+
+
+Game functions:
+
+
+Mutator Functions:
+Syntax: Mutator.differences(rows, cols, pattern)
+    Description: A helper method for moveLonely() which returns the differences between the average position 
+                 of a pattern and the point given by the rows and cols
+    Paramaters:
+        rows: an int defining the rows(y) of the comparative point
+        cols: an int defining the cols(x) of the comparative point
+        pattern: a CellArray which is used to determine its average position
+    Return:
+        x: an int between -1 and 1, meant to move the point given towards the average x-position of the pattern
+        y: an int between -1 and 1, meant to move the point given towards the average y-position of the pattern
+
+Syntax:
+
+Pattern Functions:
+
+
+Plotter Functions:
+
+
+Selector Functions:
