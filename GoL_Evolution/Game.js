@@ -334,7 +334,7 @@ class Game{
 		this.plotter.drawPop(this.frames, this.cellsAlive());
 		// plots the average position
 		//var pos = this.avgPos();
-		this.plotter.drawPosition(this.data.avePosition().x, this.data.avePosition().y);
+		this.plotter.drawPosition(this.data.array[this.frames][0], this.data.array[this.frames][1]);
 
 		this.data.storeFrames(this.frames);
 		this.data.array[this.frames][0] = this.data.collectPop();
