@@ -333,8 +333,8 @@ class Game{
 		// plots the population-frames graph
 		this.plotter.drawPop(this.frames, this.cellsAlive());
 		// plots the average position
-		var pos = this.avgPos();
-		this.plotter.drawPosition(pos.x, pos.y);
+		//var pos = this.avgPos();
+		this.plotter.drawPosition(this.data.avePosition().x, this.data.avePosition().y);
 
 		this.data.storeFrames(this.frames);
 		this.data.array[this.frames][0] = this.data.collectPop();

@@ -1,6 +1,6 @@
 class Plotter{
 	// declaration of variables
-	x; y; xAxis; yAxis;
+	xAxis; yAxis;
 
 	/**
 	 * Construct a plotter object with assigned length of X and Y axes
@@ -10,10 +10,8 @@ class Plotter{
 	 */
 	constructor(x,y){
 		// assigning the class variables
-		this.x = x;
-		this.y = y;
-		this.xAxis=250;
-		this.yAxis=135;
+		this.xAxis=x;
+		this.yAxis=y;
 	}
 
 	/**
