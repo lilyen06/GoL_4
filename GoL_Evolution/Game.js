@@ -179,8 +179,11 @@ class Game{
 		this.frames = 0;
 		this.grid.draw();
 		// turning the current trial to black
-		this.evolve.drawOnPop();
-		console.log(8);
+		//this.evolve.drawOnPop();
+		//console.log(8);
+		if(this.frames==0 && this.evolve.reset==0){
+			this.clear();
+		}
 	}
 	
 	/**
@@ -342,6 +345,9 @@ class Game{
 		 if (this.frames >= 100) {
 		 	this.stop();
 			this.evolve.test();
+			if(this.evolve.reset%2==0){
+				this.evolve.reset=0;
+			}
 		// 	//this.reloop(); // uncomment for automatic relooping
 		// 	// this.data.storeFrames(this.frames);
 		}

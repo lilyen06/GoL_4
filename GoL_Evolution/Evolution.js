@@ -1,27 +1,26 @@
 class Evolution{
-    plot; dataSet; trial;
+    plot; dataSet; trial; reset;
 
     constructor(plotter, dataset){
-        this.plot=plotter;
-        this.dataSet=dataset;
-        this.trial= dataset.array;
+        this.plot = plotter;
+        this.dataSet = dataset;
+        this.trial = dataset.array;
+        this.reset = 0;
     }
 
     test(){
-        console.log(this.trial[99]);
         this.drawOnPop();
         this.drawOnPos();
+        this.reset++;
     }
 
     drawOnPop(){
         let can = document.getElementById("graph");
         let ctx = can.getContext('2d');
         ctx.fillStyle="black";
-        //let d = this.dataSet.avePosition();
         for(let i = 0; i<100; i++){
             ctx.fillRect(20+i, this.plot.yAxis-this.trial[i][2], 1, 1);
         }
-        //ctx.save??
     }
 
     drawOnPos(){
