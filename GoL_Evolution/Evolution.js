@@ -1,23 +1,35 @@
 class Evolution{
-    plot; data; trial;
+    plot; dataSet; trial;
 
     constructor(plotter, dataset){
         this.plot=plotter;
-        this.data=dataset;
-        this.trial= new Array(20);
+        this.dataSet=dataset;
+        this.trial= dataset.array;
     }
 
-    drawOnTopOfPop(){
+    test(){
+        console.log(this.trial[99]);
+        this.drawOnPop();
+        this.drawOnPos();
+    }
+
+    drawOnPop(){
         let can = document.getElementById("graph");
         let ctx = can.getContext('2d');
         ctx.fillStyle="black";
-        ctx.fillRect(20+this.data.avePosition().x, this.plot.yAxis-this.data.avePosition.y, 1, 1);
+        //let d = this.dataSet.avePosition();
+        for(let i = 0; i<100; i++){
+            ctx.fillRect(20+i, this.plot.yAxis-this.trial[i][2], 1, 1);
+        }
+        //ctx.save??
     }
 
-    drawOnTopOfPos(){
+    drawOnPos(){
         let can = document.getElementById("graph");
         let ctx = can.getContext('2d');
         ctx.fillStyle="black";
-        ctx.fillRect(20+this.data.avePosition().x, this.data.avePosition.y, 2, 2);
+        for(let i = 0; i<100; i++){
+            ctx.fillRect(20+this.trial[i][0], this.trial[i][1]+30, 1, 1);
+        }
     }
 }

@@ -22,8 +22,6 @@ window.addEventListener("load", function(event) {
 	plotter.initialize();
 	// creating and initializing a new evolution object
 	evolve = new Evolution(plotter, data);
-	console.log(evolve.data);
-	evolve.drawOnTopOfPop();
 	//instantiate game (columns, rows, cellsize, toroidal overlap)
 	conway = new Game(50, 40, 7, false, data, plotter, evolve);
 	data.getComAndRow(conway.columns, conway.rows);

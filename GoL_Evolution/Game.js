@@ -166,7 +166,21 @@ class Game{
 	}
 
 	nextTrial(){
-		this.clear();
+		// first clear the grid without clearing the plotter
+		let r, c;
+		// loop through all cells
+		for (r = 0; r < this.rows; r++) {
+			for (c = 0; c < this.columns; c++) {
+				// turn off given cell
+				this.grid.turnOff(r, c);
+			}
+		}
+		// reset operator interface
+		this.frames = 0;
+		this.grid.draw();
+		// turning the current trial to black
+		this.evolve.drawOnPop();
+		console.log(8);
 	}
 	
 	/**
@@ -310,10 +324,11 @@ class Game{
 		//updates the HTML elements
 		this.updateHTML();
 
+		// use Sam's data!!!
 		// initialize a graph on the canvas
 		this.plotter.initialize();
 		// plots the population-frames graph
-		this.plotter.drawPop(this.frames, 2*this.cellsAlive());
+		this.plotter.drawPop(this.frames, this.cellsAlive());
 		// plots the average position
 		var pos = this.avgPos();
 		this.plotter.drawPosition(pos.x, pos.y);
@@ -326,6 +341,7 @@ class Game{
 		
 		 if (this.frames >= 100) {
 		 	this.stop();
+			this.evolve.test();
 		// 	//this.reloop(); // uncomment for automatic relooping
 		// 	// this.data.storeFrames(this.frames);
 		}

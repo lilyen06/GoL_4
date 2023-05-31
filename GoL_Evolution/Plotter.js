@@ -71,9 +71,10 @@ class Plotter{
 		//these lines return a reference to the HTML canvas element above
 		let can = document.getElementById("graph");
 		let ctx = can.getContext('2d');
+		ctx.imageSmoothingEnabled = false;
 		//all painting to the canvas is done to the canvas context object
 		ctx.fillStyle = "red"; // plotted points are red to differentiate from the other graph
-		ctx.fillRect(20+x, y+30, 2, 2); //paints cells at te xy coordinates given by the parameter
+		ctx.fillRect(20+x, y+30, 1, 1); //paints cells at te xy coordinates given by the parameter
 		// the y-value passed to fillRect remains to be y because the percieved directionality flips
 	}
 
