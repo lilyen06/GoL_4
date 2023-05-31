@@ -48,7 +48,6 @@ class Mutator{
         let cols;
         for (let r=0; r<=pattern.rows-1; r++){
             for (let c=0; c<=pattern.columns-1; c++) {
-                console.log(r+"          "+c);
                 if (pattern.isOn(r,c)){
                     countstemp = counts[r][c];
                     if (countsleast==-1){

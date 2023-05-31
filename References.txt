@@ -30,7 +30,11 @@ Syntax: Mutator.differences(rows, cols, pattern)
         x: an int between -1 and 1, meant to move the point given towards the average x-position of the pattern
         y: an int between -1 and 1, meant to move the point given towards the average y-position of the pattern
 
-Syntax:
+Syntax: Mutator.moveLonely(pattern)
+    Description: moveLonely identifies the live cell with the least amount of neighbours, and moves it towards
+                 the average position of the pattern
+    Parameters: pattern: a CellArray to be modified
+    Return: pattern: a modified CellArray
 
 Pattern Functions:
 
