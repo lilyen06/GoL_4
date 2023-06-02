@@ -2,7 +2,7 @@ class DataSet {
 
     constructor() {
         this.popCounter;
-        this.frames;
+        this.frames;//
         this.cellArray;
         this.columns;
         this.rows;
