@@ -16,28 +16,55 @@ functions functions:
 
 
 Game functions:
-
+draw last pat
+mutate
+drawpat
+clear
 
 Mutator Functions:
-Syntax: Mutator.differences(rows, cols, pattern)
-    Description: A helper method for moveLonely() which returns the differences between the average position 
-                 of a pattern and the point given by the rows and cols
-    Paramaters:
-        rows: an int defining the rows(y) of the comparative point
-        cols: an int defining the cols(x) of the comparative point
-        pattern: a CellArray which is used to determine its average position
-    Return:
-        x: an int between -1 and 1, meant to move the point given towards the average x-position of the pattern
-        y: an int between -1 and 1, meant to move the point given towards the average y-position of the pattern
+    Syntax: new Mutator()
+        Description: instantiates a Mutator
 
-Syntax: Mutator.moveLonely(pattern)
-    Description: moveLonely identifies the live cell with the least amount of neighbours, and moves it towards
-                 the average position of the pattern
-    Parameters: pattern: a CellArray to be modified
-    Return: pattern: a modified CellArray
+    Syntax: Mutator.differences(rows, cols, pattern)
+        Description: A helper method for moveLonely() which returns the differences between the average position 
+                    of a pattern and the point given by the rows and cols
+        Paramaters:
+            rows: an int defining the rows(y) of the comparative point
+            cols: an int defining the cols(x) of the comparative point
+            pattern: a CellArray which is used to determine its average position
+        Return:
+            x: an int between -1 and 1, meant to move the point given towards the average x-position of the pattern
+            y: an int between -1 and 1, meant to move the point given towards the average y-position of the pattern
+
+    Syntax: Mutator.moveLonely(pattern)
+        Description: moveLonely identifies the live cell with the least amount of neighbours, and moves it towards
+                    the average position of the pattern
+        Parameters: pattern: a CellArray to be modified
+        Return: pattern: a modified CellArray
+
+    Syntax: Mutator.addPoint(pattern)
+        Description: addPoint adds a point near to the average position of a pattern
+        Parameters: pattern: a CellArray to be modified
+        Return: pattern: a modified CellArray
+
+    Syntax: Mutator.killPoint(pattern)
+        Description: removes a point near to the average position. If all nine of the points surrounding the average 
+                    position are empty, adds a point instead
+        Parameters: pattern: a CellArray to be modified
+        Return: pattern: a modified CellArray
 
 Pattern Functions:
+    Syntax: new Pattern(rows,cols,game,numAlive)
+        Description: Populates the class variables of a Pattern object
+        Parameters:
+            rows: int, defines the number of rows a pattern should fit in
+            cols: int, defines the number of cols a pattern should fit in
+            game: Game object
+            numAlive: int, defines how many cells will be turned on in the rows x cols area
 
+    Syntax: Pattern.randomize()
+        Description: Populates and draws a random pattern
+        Return: CellArray (grid) of pattern
 
 Plotter Functions:
 

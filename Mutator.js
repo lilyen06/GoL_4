@@ -2,12 +2,9 @@ class Mutator{
     conway;
 
     /**
-     * instantiates mutator
-     * @param {Game} conway 
+     * instantiates mutator 
      */
-    constructor(conway){
-        this.conway = conway;
-    }
+    constructor(){}
 
     /**
      * Return the differences between the average position and the point given

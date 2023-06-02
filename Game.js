@@ -48,17 +48,17 @@ class Game{
 		this.drawPat(this.pattern);
 	}
 
-	/**
-	 * mutates the last pattern generated
-	 */
-	mutateLast(){
-		this.clear();
-		let mutator = new Mutator(this);
-		//this.pattern = mutator.moveLonely(this.pattern);
-		//this.pattern = mutator.addPoint(this.pattern);
-		this.pattern = mutator.killPoint(this.pattern);
-		this.drawPat(this.pattern);
-	}
+	// /**
+	//  * mutates the last pattern generated
+	//  */
+	// mutateLast(){
+	// 	this.clear();
+	// 	let mutator = new Mutator(this);
+	// 	//this.pattern = mutator.moveLonely(this.pattern);
+	// 	//this.pattern = mutator.addPoint(this.pattern);
+	// 	this.pattern = mutator.killPoint(this.pattern);
+	// 	this.drawPat(this.pattern);
+	// }
 
 	/**
 	 * Mutate and reloop the pattern until isolating one with a constant population and changing position
