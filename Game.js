@@ -320,7 +320,7 @@ class Game{
 
 		this.frames++;
 		
-		 if (this.frames >= 30) {
+		if (this.frames >= 30) {
 		 	this.stop();
 			// console.log(this.selector.dismiss(5,5));
 			// console.log(this.selector.tierTwo(5,5));
