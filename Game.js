@@ -64,25 +64,25 @@ class Game{
 
 	/**
 	 * Mutate and reloop the pattern until isolating one with a constant population and changing position
-	 * @param {int} frames
 	 */
-	mutate(frames){
-		console.log("in mutate");
+	mutate(){
 		//while(this.frames<frames){}
 		// if Selector's dismiss is triggered, or a pattern has been mutated 5 times, generate and mutate a new pattern
-		if (this.selector.dismiss(5,5)||mutated>=5){
-			console.log("in if");
+		if (this.selector.dismiss(5,5)||this.mutated>=5){
+			console.log('Dismiss');
 			this.reloop();
 			this.mutated = 0;
 		} 
 		// if Selector's good for a larger range is triggered, check if it is a perfect match, if not moveLonely, if yes draw the pattern and stop the game
 		else if (this.selector.good(5,5)){
 			if (!this.selector.good(0,0)){
+				console.log("found almost pat!");
 				this.pattern = mutator.moveLonely(this.pattern);
 				this.clear();
 				this.drawLastPat();
 				this.mutated++;
 			} else {
+				console.log("found pat!!!");
 				this.clear;
 				this.drawLastPat();
 				this.stop();
