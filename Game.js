@@ -11,7 +11,7 @@ class Game{
 	 * @param {dataSet} data
 	 * @param {plotter} plotter
 	 */
-	constructor(columns, rows, cellsize, toroidal, data, plotter){
+	constructor(columns, rows, cellsize, toroidal, data, plotter, selector){
 		this.columns = columns;
 		this.rows = rows;
 		this.cellsize = cellsize;
@@ -21,6 +21,7 @@ class Game{
 		this.running = false;
 		this.data = data;
 		this.plotter = plotter; // assigns a the parameter plotter to a new class variable called plotter
+		this.selector = selector;
 	}
 
 	/**
@@ -225,7 +226,6 @@ class Game{
 		this.grid.draw();
 		//updates the HTML elements
 		this.updateHTML();
-
 		// initialize a graph on the canvas
 		this.plotter.initialize();
 		// plots the population-frames graph
@@ -235,7 +235,8 @@ class Game{
 		this.plotter.drawPosition(pos.x, pos.y);
 
 		this.data.storeFrames(this.frames);
-		this.data.array[this.frames][0] = this.data.collectPop();
+		// this.data.setComAndRow(this.columns,this.rows);
+		// this.data.setCellArray(this.grid);
 		this.data.populateArray();
 
 		this.frames++;

@@ -7,6 +7,9 @@ class DataSet {
         this.columns;
         this.rows;
         this.array = new Array(100).fill(null).map(() => new Array(3).fill(null)); //build an empty three column array
+        this.population;
+        this.position;
+        this.array = new Array(100).fill(null).map(() => new Array(3).fill(null));
     }
 
     getComAndRow(columns, rows) {
