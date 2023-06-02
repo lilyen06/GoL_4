@@ -321,6 +321,11 @@ class Game{
 		
 		 if (this.frames >= 100) {
 		 	this.stop();
+			for (var i = 0; i < 100; i++) {
+				console.log(this.data.getPosition[i]);
+				console.log(this.data.getPopulation[i])
+			}
+
 		// 	//this.reloop(); // uncomment for automatic relooping
 		// 	// this.data.storeFrames(this.frames);
 		}
