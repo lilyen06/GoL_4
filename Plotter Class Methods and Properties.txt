@@ -1,16 +1,16 @@
 Plotter Class Methods and Properties
 
-NAME						DESCRIPTION
+NAME							DESCRIPTION
 
-constructor(x, y)			Instantiates the values of an instance of a class (the length of the axes)
+constructor(x, y)				Instantiates the values of an instance of a class (the length of the axes)
 
-initialize()				Draws X and Y axes using the values from the constructor
+initialize()					Draws X and Y axes using the values from the constructor
 
-drawPop(x, y)				Draws the points on the X and Y axes where the Y represents population and X represents generation (frames)
+drawPop(x, y)					Draws the points on the X and Y axes where the Y represents population and X represents generation (frames)
 
-drawPosition(x, y)			Draws the points on the axes where the X and Y represents the average X and Y position of all alive cells
+drawPosition(x, y)				Draws the points on the axes where the X and Y represents the average and Y position of all alive cells
 
-clear()						Clears the entire canvas
+clear()							Clears the entire canvas
 
 
 Plotter constructor()
@@ -18,7 +18,7 @@ Plotter constructor()
 		The constructor() of a Plotter object instantiates the length of the axes (in pixels)
 
 	Syntax
-		new Plotter(xAxis, yAxis)
+		new Plotter(xAxis, yAxis);
 
 	Parameters
 
@@ -40,7 +40,7 @@ Plotter initialize()
 			Where this.xAxis and this.yAxis are values instantiated in or passed to the constructor
 
 	Syntax
-		plotter.initialize()
+		plotter.initialize();
 
 	Parameters
 		None.
@@ -54,7 +54,7 @@ Plotter drawPop()
 		The drawPop() method is adjusted to make the origin be the bottom-left of the canvas
 
 	Syntax
-		plotter.drawPop(x-value, y-value)
+		plotter.drawPop(x-value, y-value);
 
 	Parameters
 
@@ -74,7 +74,7 @@ Plotter drawPosition()
 		The drawPosition() method is not adjusted to make the origin at the bottom-left of the canvas
 
 	Syntax
-		plotter.drawPosition(x-value, y-value)
+		plotter.drawPosition(x-value, y-value);
 
 	Parameters
 
@@ -93,7 +93,7 @@ Plotter clear()
 		The clear() method clears te entire Generation Plotter canvas
 
 	Syntax
-		plotter.clear()
+		plotter.clear();
 
 	Parameters
 		None.

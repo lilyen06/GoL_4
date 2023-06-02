@@ -289,6 +289,7 @@ class Game{
 	/**
    * uses nested or loops to find the sum of all x and all y positions of alive cells
 	 * called as this.avgPos()
+	 * local calculation of average position of all alive cells
 	 * @returns the average value of the x and y position of all alive cells
 	 */
 	avgPos(){

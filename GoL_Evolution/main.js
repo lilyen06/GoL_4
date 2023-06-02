@@ -18,7 +18,7 @@ window.addEventListener("load", function(event) {
 	//creating a new data object
 	data = new DataSet();
 	// creating and initializing a new plotter object
-	plotter = new Plotter(250, 135); // passing axes lengths
+	plotter = new Plotter(250, 135); // initialing new plotter object passing axes lengths
 	plotter.initialize();
 	// creating and initializing a new evolution object
 	evolve = new Evolution(plotter, data);
