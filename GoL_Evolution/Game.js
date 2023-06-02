@@ -327,7 +327,10 @@ class Game{
 		//updates the HTML elements
 		this.updateHTML();
 
-		// use Sam's data!!!
+		this.data.storeFrames(this.frames);
+		this.data.array[this.frames][0] = this.data.collectPop();
+		this.data.populateArray();
+
 		// initialize a graph on the canvas
 		this.plotter.initialize();
 		// plots the population-frames graph
@@ -336,18 +339,15 @@ class Game{
 		//var pos = this.avgPos();
 		this.plotter.drawPosition(this.data.array[this.frames][0], this.data.array[this.frames][1]);
 
-		this.data.storeFrames(this.frames);
-		this.data.array[this.frames][0] = this.data.collectPop();
-		this.data.populateArray();
-
 		this.frames++;
 		
 		 if (this.frames >= 100) {
 		 	this.stop();
-			this.evolve.test();
-			if(this.evolve.reset%2==0){
+			 if(this.evolve.reset%2==0){
 				this.evolve.reset=0;
+				this.clear();
 			}
+			this.evolve.test();
 		// 	//this.reloop(); // uncomment for automatic relooping
 		// 	// this.data.storeFrames(this.frames);
 		}

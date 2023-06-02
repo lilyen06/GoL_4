@@ -5,7 +5,7 @@ class Evolution{
         this.plot = plotter;
         this.dataSet = dataset;
         this.trial = dataset.array;
-        this.reset = 0;
+        this.reset = 1;
     }
 
     test(){
