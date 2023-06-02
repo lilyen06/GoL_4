@@ -11,7 +11,7 @@ class Game{
 	 * @param {dataSet} data
 	 * @param {plotter} plotter
 	 */
-	constructor(columns, rows, cellsize, toroidal, data, plotter){
+	constructor(columns, rows, cellsize, toroidal, data, plotter, selector){
 		this.columns = columns;
 		this.rows = rows;
 		this.cellsize = cellsize;
@@ -21,6 +21,7 @@ class Game{
 		this.running = false;
 		this.data = data;
 		this.plotter = plotter; // assigns a the parameter plotter to a new class variable called plotter
+		this.selector = selector;
 	}
 
 	/**
@@ -304,7 +305,6 @@ class Game{
 		this.grid.draw();
 		//updates the HTML elements
 		this.updateHTML();
-
 		// initialize a graph on the canvas
 		this.plotter.initialize();
 		// plots the population-frames graph
@@ -314,18 +314,20 @@ class Game{
 		this.plotter.drawPosition(4*pos.x, 8*pos.y); // blows up the values of (x, y) to help differentiate from the other graph
 
 		this.data.storeFrames(this.frames);
-		this.data.array[this.frames][0] = this.data.collectPop();
+		// this.data.setComAndRow(this.columns,this.rows);
+		// this.data.setCellArray(this.grid);
 		this.data.populateArray();
 
 		this.frames++;
 		
-		 if (this.frames >= 100) {
+		 if (this.frames >= 30) {
 		 	this.stop();
-			for (var i = 0; i < 100; i++) {
-				console.log(this.data.getPosition[i]);
-				console.log(this.data.getPopulation[i])
-			}
-
+			// console.log(this.selector.dismiss(5,5));
+			// console.log(this.selector.tierTwo(5,5));
+			// console.log(this.selector.good(5,5));
+			// console.log(this.selector.chaos(5,5));
+			console.log(this.data.getPosition(23));
+			console.log(this.data.getPopulation(23));
 		// 	//this.reloop(); // uncomment for automatic relooping
 		// 	// this.data.storeFrames(this.frames);
 		}
