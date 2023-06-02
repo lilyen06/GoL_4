@@ -1,13 +1,12 @@
 class DataSet {
 
     constructor() {
+        this.popCounter;
         this.frames;
         this.cellArray;
         this.columns;
         this.rows;
-        this.population = new Array();
-        this.position = new Array();
-        this.array = new Array(100).fill(null).map(() => new Array(3).fill(null));
+        this.array = new Array(100).fill(null).map(() => new Array(3).fill(null)); //build an empty three column array
     }
 
     getComAndRow(columns, rows) {
@@ -20,48 +19,35 @@ class DataSet {
     }
 
     populateArray() {
-        // for (i = 0; i < 50; i++) {
-            let PopCounter = 0;
+            this.popCounter = 0;
             let RowSum = 0;
             let ColumnSum = 0;
-            // Game.frameloop();
             var i,j;
             console.log(this.rows);
             for (i = 0; i < this.rows; i++) {
                 for (j = 0; j < this.columns; j++) {
                     if (this.cellArray.isOn(i,j)) {
-                        PopCounter += 1;
+                        this.popCounter += 1;
                         RowSum += i;
                         ColumnSum += j;
                     }
                 }
             }
-            let y = Math.round(RowSum/PopCounter);
-            let x = Math.round(ColumnSum/PopCounter);
-            this.array[this.frames][1] = y;
-            this.array[this.frames][0] = x;
-            this.array[this.frames][2] = PopCounter;
-       // }
-    }
-
-    //pos x is column 0, pos y is column 1, population is column 3
-
-    collectPop() {
-        let PopCounter = 0;
-        var i,j;
-        for (i = 0; i < this.rows; i++) {
-            for (j = 0; j < this.columns; j++) {
-                if (this.cellArray.isOn(i,j)) {
-                    PopCounter += 1;
-                }
-            }
-        }
-        PopCounter = this.array[this.frames][2];
-        return PopCounter;
+            let y = Math.round(RowSum/this.popCounter);
+            let x = Math.round(ColumnSum/this.popCounter);
+            this.array[this.frames][0] = x; //the first column of the array stores ave x position
+            this.array[this.frames][1] = y; //the second column of the array stores ave y position
+            this.array[this.frames][2] = this.popCounter; //the third column stores population
+       
     }
 
     storeFrames(frames) {
         this.frames = frames;
+    }
+
+    collectPop() {
+        this.popCounter = this.array[this.frames][2];
+        return this.popCounter;
     }
 
     popWacky() {
@@ -72,17 +58,22 @@ class DataSet {
     }
 
     popConstant() {
-        let pop = 0;
+        this.popCounter = 0;
         var i,j;
-        for (i = (this.frames-10); i < this.frames; i++) {
-            pop = this.array[i][2];
-            for (j = 0; j < 3; j++) {
-                if (((pop + j) == this.array[i-1][2])||((pop - j) == this.array[i-1][2])) {
-                    return true;
-                }
-            }
+        if (this.popZero() == true) {
             return false;
         }
+        else {
+            for (i = (this.frames-10); i < this.frames; i++) {
+                this.popCounter = this.array[i][2];
+                for (j = 0; j < 3; j++) {
+                    if (((this.popCounter + j) == this.array[i-1][2])||((this.popCounter - j) == this.array[i-1][2])) {
+                        return true;
+                    }
+                }
+            }
+        }
+            return false;
     }
 
     popZero() {
@@ -104,7 +95,13 @@ class DataSet {
         }
         yAve = Math.round(yPos/this.frames);
         xAve = Math.round(xPos/this.frames);
-        return (xAve,yAve);
+        console.log("Hi");
+        console.log(xAve);
+        console.log(yAve); 
+        return {
+            x: xAve,
+            y: yAve
+        };
     }
 
     diffPosition() {
@@ -129,8 +126,3 @@ class DataSet {
     }
 
 }
-//store frames method with paramter frames assigned to this.frames
-//call store frames in game loop
-//determine if pop is constant growing or goes to zero (three methods)
-//determine average position, if it is changing, or staying relatively the same
-//selector should be able to ask using those methods
