@@ -5,84 +5,92 @@ class DataSet {
         this.cellArray;
         this.columns;
         this.rows;
-        this.population = new Array();
-        this.position = new Array();
+        this.population;
+        this.position;
         this.array = new Array(100).fill(null).map(() => new Array(3).fill(null));
     }
 
-    getComAndRow(columns, rows) {
+    setComAndRow(columns, rows) {
         this.columns = columns;
         this.rows = rows;
     }
 
-    getCellArray(cellArray) {
+    setCellArray(cellArray) {
         this.cellArray = cellArray;
     }
 
+    getPosition(index) {
+        return (this.array[index][0],this.array[index][1]);
+    }
+
+    getPopulation(index) {
+        return this.array[index][0];
+    }
+
     populateArray() {
-        // for (i = 0; i < 50; i++) {
-            let PopCounter = 0;
-            let RowSum = 0;
-            let ColumnSum = 0;
-            // Game.frameloop();
-            var i,j;
-            console.log(this.rows);
+        this.popCounter = 0;
+        let RowSum = 0;
+        let ColumnSum = 0;
+        var i,j;
             for (i = 0; i < this.rows; i++) {
                 for (j = 0; j < this.columns; j++) {
                     if (this.cellArray.isOn(i,j)) {
-                        PopCounter += 1;
+                        this.popCounter += 1;
                         RowSum += i;
                         ColumnSum += j;
                     }
                 }
             }
-            let y = Math.round(RowSum/PopCounter);
-            let x = Math.round(ColumnSum/PopCounter);
-            this.array[this.frames][1] = y;
-            this.array[this.frames][0] = x;
-            this.array[this.frames][2] = PopCounter;
-       // }
+            let y = Math.round(RowSum/this.popCounter);
+            let x = Math.round(ColumnSum/this.popCounter);
+            this.array[this.frames][0] = x; //the first column of the array stores ave x position
+            this.array[this.frames][1] = y; //the second column of the array stores ave y position
+            this.array[this.frames][2] = this.popCounter; //the third column stores population
     }
 
-    //pos x is column 0, pos y is column 1, population is column 3
+    //pos x is column 0, pos y is column 1, population is column 2
 
-    collectPop() {
-        let PopCounter = 0;
-        var i,j;
-        for (i = 0; i < this.rows; i++) {
-            for (j = 0; j < this.columns; j++) {
-                if (this.cellArray.isOn(i,j)) {
-                    PopCounter += 1;
-                }
-            }
-        }
-        PopCounter = this.array[this.frames][2];
-        return PopCounter;
-    }
+    // collectPop() {
+    //     let PopCounter = 0;
+    //     var i,j;
+    //     for (i = 0; i < this.rows; i++) {
+    //         for (j = 0; j < this.columns; j++) {
+    //             if (this.cellArray.isOn(i,j)) {
+    //                 PopCounter += 1;
+    //             }
+    //         }
+    //     }
+    //     PopCounter = this.array[this.frames][2];
+    //     return PopCounter;
+    // }
 
     storeFrames(frames) {
         this.frames = frames;
     }
 
-    popWacky() {
-        if (this.popConstant() == false && this.popZero() == false) {
+    popWacky(number) {
+        if (this.popConstant(number) == false && this.popZero() == false) {
             return true;
         }
         return false;
     }
 
-    popConstant() {
-        let pop = 0;
+    popConstant(number) {
+        let pop = this.array[this.frames][2];;
         var i,j;
-        for (i = (this.frames-10); i < this.frames; i++) {
-            pop = this.array[i][2];
-            for (j = 0; j < 3; j++) {
-                if (((pop + j) == this.array[i-1][2])||((pop - j) == this.array[i-1][2])) {
-                    return true;
+        if (this.popZero() == false) {
+            for (i = (this.frames-5); i < this.frames; i++) {
+                for (j = 0; j < number; j++) {
+                    if (((pop + j) == this.array[i-1][2])||((pop - j) == this.array[i-1][2])) {
+                        // console.log(pop);
+                        // console.log(j);
+                        // console.log(this.array[i-1][2]);
+                        return true;
+                    }
                 }
             }
-            return false;
         }
+        return false;
     }
 
     popZero() {
@@ -107,25 +115,27 @@ class DataSet {
         return (xAve,yAve);
     }
 
-    diffPosition() {
-        if (this.samePosition() == false) {
+    diffPosition(number) {
+        let yPos = this.array[this.frames][1];;
+        let xPos = this.array[this.frames][0];
+        var i,j;
+        for (i = (this.frames-5); i < this.frames; i++) {
+            for (j = 0; j < number; j++) {
+                if (((yPos + j) == this.array[i-1][1])||((yPos - j) == this.array[i-1][1])) {
+                    if (((xPos + j) == this.array[i-1][0])||((xPos - j) == this.array[i-1][0])) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    }
+
+    samePosition(number) {
+        if (this.diffPosition(number) == false) {
             return true;
         }
         return false;
-    }
-
-    samePosition() {
-        let pos = 0;
-        var i,j;
-        for (i = (this.frames-10); i < this.frames; i++) {
-            pos = this.array[i][2];
-            for (j = 0; j < 3; j++) {
-                if (((pos + j) == this.array[i-1][2])||((pos - j) == this.array[i-1][2])) {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 
 }

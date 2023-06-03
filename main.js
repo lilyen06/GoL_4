@@ -9,6 +9,8 @@ var mousedown = false;
 
 var data;
 
+var selector;
+
 /**
  * main function is called on windowload event
  */
@@ -16,13 +18,14 @@ window.addEventListener("load", function(event) {
 
 	//creating a new data object
 	data = new DataSet();
+	selector = new Selector(data);
 	// creating and initializing a new plotter object
 	plotter = new Plotter(10, 10);
 	plotter.initialize();
 	//instantiate game (columns, rows, cellsize, toroidal overlap)
-	conway = new Game(50, 40, 7, false, data, plotter);
-	data.getComAndRow(conway.columns, conway.rows);
-	data.getCellArray(conway.grid);
+	conway = new Game(50, 40, 7, false, data, plotter, selector);
+	data.setComAndRow(conway.columns, conway.rows);
+	data.setCellArray(conway.grid);
 	pattern = new Pattern(6,5,conway,10);
 	conway.initialize(pattern);
 });
