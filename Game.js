@@ -75,7 +75,7 @@ class Game{
 		} 
 		// if Selector's good for a larger range is triggered, check if it is a perfect match, if not moveLonely, if yes draw the pattern and stop the game
 		else if (this.selector.good(5,5)){
-			if (!this.selector.good(0,0)){
+			if (!this.selector.good(1,1)){
 				console.log("found almost pat!");
 				this.pattern = this.mutator.moveLonely(this.pattern);
 				this.clear();
@@ -83,7 +83,7 @@ class Game{
 				this.mutated++;
 			} else {
 				console.log("found pat!!!");
-				this.clear;
+				this.clear();
 				this.drawLastPat();
 				this.stop();
 			}
