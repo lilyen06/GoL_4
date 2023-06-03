@@ -1,0 +1,31 @@
+DataSet
+
+Methods:
+
+constructor() Builds a class by instantiating instance variables
+	Creates: this.popCounter, this.frames, this.cellArray, this.columns, this.rows, and this.array
+getComAndRow(columns,rows) Gets the number of columns and rows and sets them to corresponding instance variables
+	Parameters:
+	columns		number of columns in grid
+	rows		number of rows in grid
+getCellArray() Gets the cell array class and sets it to corresponding instance variable
+	Parameters:
+	cellArray	a cell array class
+populateArray() Adds a value to each column in the array -- average x position, y position, and population
+storeFrames() Stores the number of frames currently in an instance variable
+	Parameters: 
+	frames		number of frames since game was on
+collectPop() Finds the current population of alive cells and returns it
+	Return: number
+popWacky() Checks if population is changing
+	Return: boolean
+popConstant() Checks if population is a non-zero constant
+	Return: boolean
+popZero() Checks if population is zero
+	Return: boolean
+avePosition() Calculates the average x position and the average y position over a set number of frames
+	Return: two-variable object with x and y coordinate representing average point
+diffPosition() Checks if average position is changing
+	Return: boolean
+samePosition() Checks if average position is constant
+	Return: boolean

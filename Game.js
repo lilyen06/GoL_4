@@ -22,6 +22,7 @@ class Game{
 		this.data = data;
 		this.plotter = plotter; // assigns a the parameter plotter to a new class variable called plotter
 		this.selector = selector;
+		this.mutator = new Mutator(this); // instantiate a mutator
 	}
 
 	/**
@@ -63,35 +64,32 @@ class Game{
 
 	/**
 	 * Mutate and reloop the pattern until isolating one with a constant population and changing position
-	 * @param {int} frames
 	 */
-	mutate(frames){
-		// instantiate a mutator
-		let mutator = new Mutator(this);
-
-		while(this.frames<frames){}
+	mutate(){
+		//while(this.frames<frames){}
 		// if Selector's dismiss is triggered, or a pattern has been mutated 5 times, generate and mutate a new pattern
-		if (Selector.dismiss(5,5)||mutated>=5){
+		if (this.selector.dismiss(5,5)||this.mutated>=5){
+			console.log('Dismiss');
 			this.reloop();
 			this.mutated = 0;
-			this.mutate();
 		} 
 		// if Selector's good for a larger range is triggered, check if it is a perfect match, if not moveLonely, if yes draw the pattern and stop the game
-		else if (Selector.good(5,5)){
-			if (!Selector.good(0,0)){
+		else if (this.selector.good(5,5)){
+			if (!this.selector.good(0,0)){
+				console.log("found almost pat!");
 				this.pattern = mutator.moveLonely(this.pattern);
 				this.clear();
 				this.drawLastPat();
 				this.mutated++;
-				this.mutate();
 			} else {
+				console.log("found pat!!!");
 				this.clear;
 				this.drawLastPat();
 				this.stop();
 			}
 		} 
 		// if Selector's chaos is triggered, mutate the pattern based on how many mutations it has already undergone
-		else if (Selector.chaos(5,5)){
+		else if (this.selector.chaos(5,5)){
 			if (this.mutated <=3){
 				this.pattern = mutator.addPoint(this.pattern);
 				this.clear();
