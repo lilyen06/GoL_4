@@ -1,6 +1,6 @@
 class Game{
 	//declaration of instance variables is optional, but good practice 
-	grid; rows; columns; cellsize; frames; running;toroidal;pattern;mutated;
+	grid; rows; columns; cellsize; frames; running;toroidal;pattern;mutated;mutator;
 
 	/**
 	 * constructor is named as such and takes a similar form to that in Java
@@ -77,7 +77,7 @@ class Game{
 		else if (this.selector.good(5,5)){
 			if (!this.selector.good(0,0)){
 				console.log("found almost pat!");
-				this.pattern = mutator.moveLonely(this.pattern);
+				this.pattern = this.mutator.moveLonely(this.pattern);
 				this.clear();
 				this.drawLastPat();
 				this.mutated++;
@@ -91,12 +91,12 @@ class Game{
 		// if Selector's chaos is triggered, mutate the pattern based on how many mutations it has already undergone
 		else if (this.selector.chaos(5,5)){
 			if (this.mutated <=3){
-				this.pattern = mutator.addPoint(this.pattern);
+				this.pattern = this.mutator.addPoint(this.pattern);
 				this.clear();
 				this.drawLastPat();
 				this.mutated++;
 			} else {
-				this.pattern = mutator.killPoint(this.pattern);
+				this.pattern = this.mutator.killPoint(this.pattern);
 				this.clear();
 				this.drawLastPat();
 				this.mutated++;
