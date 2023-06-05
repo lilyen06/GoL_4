@@ -4,7 +4,7 @@ NAME								DESCRIPTION
 
 constructor(plotter, dataset)		Instantiates the instance variable of an Evolution object
 
-test()								Runs the drawOnPop and drawOnPos methods
+test()								Runs the drawOnPop() and drawOnPos() methods
 
 drawOnPop()							Draws over the current population plotter with black fillStyle
 
@@ -48,4 +48,26 @@ Evolution test()
 
 Evolution drawOnPop()
 	Definition and Usage
-		
+		Using the collected data of the current trial from the DataSet object passed to the contructor to redraw the points of the population to frames graph on the Generation Plotter in black to show the difference between this trial and the next.
+
+	Syntax
+		evolution.drawOnPop();
+
+	Parameters
+		None.
+
+	Return Value
+		None.
+
+Evolution drawOnPos()
+	Definition and Usage
+		Using the collected data of the current trial from the DataSet object passed to te contructor to redraw the points of the average position graph on the Generation Plotter in black to show the difference between this trial and the next.
+
+	Syntax
+		evolution.drawOnTop();
+
+	Parameters
+		None.
+
+	Return Value
+		None.
