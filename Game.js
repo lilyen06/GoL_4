@@ -237,6 +237,8 @@ class Game{
 		// this.data.setCellArray(this.grid);
 		this.data.populateArray();
 
+		console.log(this.data.getPosition(this.frames));
+
 		this.frames++;
 		 if (this.frames >= 100) {
 		 	this.mutate(this.frames);
