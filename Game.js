@@ -11,7 +11,7 @@ class Game{
 	 * @param {dataSet} data
 	 * @param {plotter} plotter
 	 */
-	constructor(columns, rows, cellsize, toroidal, data, plotter, selector){
+	constructor(columns, rows, cellsize, toroidal, data, plotter, evolve, selector){
 		this.columns = columns;
 		this.rows = rows;
 		this.cellsize = cellsize;
@@ -22,6 +22,7 @@ class Game{
 		this.data = data;
 		this.plotter = plotter; // assigns a the parameter plotter to a new class variable called plotter
 		this.selector = selector;
+		this.evolve = evolve;
 		this.mutator = new Mutator(this); // instantiate a mutator
 	}
 
@@ -160,6 +161,27 @@ class Game{
 		this.plotter.clear();
 	}
 	
+	nextTrial(){
+		// first clear the grid without clearing the plotter
+		let r, c;
+		// loop through all cells
+		for (r = 0; r < this.rows; r++) {
+			for (c = 0; c < this.columns; c++) {
+				// turn off given cell
+				this.grid.turnOff(r, c);
+			}
+		}
+		// reset operator interface
+		this.frames = 0;
+		this.grid.draw();
+		// turning the current trial to black
+		//this.evolve.drawOnPop();
+		//console.log(8);
+		if(this.frames==0 && this.evolve.reset==0){
+			this.clear();
+		}
+	}
+	
 	/**
 	 * updates the game with the new neighbors count
 	 */
@@ -227,10 +249,9 @@ class Game{
 		// initialize a graph on the canvas
 		this.plotter.initialize();
 		// plots the population-frames graph
-		this.plotter.drawPop(this.frames, 2*this.grid.cellsAlive());
+		this.plotter.drawPop(this.frames, this.cellsAlive());
 		// plots the average position
-		var pos = this.grid.avgPos();
-		this.plotter.drawPosition(pos.x, pos.y);
+		this.plotter.drawPosition(this.data.array[this.frames][0], this.data.array[this.frames][1]);
 
 		this.data.storeFrames(this.frames);
 		// this.data.setCellArray(this.grid);
@@ -241,6 +262,11 @@ class Game{
 		this.frames++;
 		
 		if (this.frames >= 100){
+			if(this.evolve.reset%2==0){
+				this.evolve.reset=0;
+				this.clear();
+			}
+			this.evolve.test();
 			this.mutate();
 		}
 		
