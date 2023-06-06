@@ -1,6 +1,6 @@
 class Game{
 	//declaration of instance variables is optional, but good practice 
-	grid; rows; columns; cellsize; frames; running;toroidal;pattern;mutated;mutator;
+	grid; rows; columns; cellsize; frames; running;toroidal;pattern;mutated;mutator;selector;
 
 	/**
 	 * constructor is named as such and takes a similar form to that in Java
@@ -239,25 +239,9 @@ class Game{
 		console.log(this.data.getPosition(this.frames));
 
 		this.frames++;
-
-		if (this.frames >= 7) {
-			if (this.selector.good(1,1) == true) {
-				console.log("hi");
-				this.stop();
-				// console.log(this.data.printPopSet());
-			}
-		}
 		
-		if (this.frames >= 30) {
-		 	this.stop();
-			// console.log(this.selector.dismiss(5,5));
-			// console.log(this.selector.tierTwo(5,5));
-			// console.log(this.selector.good(5,5));
-			// console.log(this.selector.chaos(5,5));
-			console.log(this.data.getPosition(23));
-			console.log(this.data.getPopulation(23));
-		// 	//this.reloop(); // uncomment for automatic relooping
-		// 	// this.data.storeFrames(this.frames);
+		if (this.frames >= 100){
+			this.mutate();
 		}
 		
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
