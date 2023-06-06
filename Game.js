@@ -73,21 +73,6 @@ class Game{
 			this.reloop();
 			this.mutated = 0;
 		} 
-		// if Selector's good for a larger range is triggered, check if it is a perfect match, if not moveLonely, if yes draw the pattern and stop the game
-		else if (this.selector.good(5,5)){
-			if (!this.selector.good(1,1)){
-				console.log("found almost pat!");
-				this.pattern = this.mutator.moveLonely(this.pattern);
-				this.clear();
-				this.drawLastPat();
-				this.mutated++;
-			} else {
-				console.log("found pat!!!");
-				this.clear();
-				this.drawLastPat();
-				this.stop();
-			}
-		} 
 		// if Selector's chaos is triggered, mutate the pattern based on how many mutations it has already undergone
 		else if (this.selector.chaos(5,5)){
 			if (this.mutated <=3){
@@ -102,6 +87,21 @@ class Game{
 				this.mutated++;
 			}
 		}
+		// if Selector's good for a larger range is triggered, check if it is a perfect match, if not moveLonely, if yes draw the pattern and stop the game
+		else if (this.selector.good(5,5)){
+			if (!this.selector.good(0,0)){
+				console.log("found almost pat!");
+				this.pattern = this.mutator.moveLonely(this.pattern);
+				this.clear();
+				this.drawLastPat();
+				this.mutated++;
+			} else {
+				console.log("found pat!!!");
+				this.clear();
+				this.drawLastPat();
+				this.stop();
+			}
+		} 
 	}
 
 	/**
