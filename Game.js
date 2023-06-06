@@ -314,11 +314,18 @@ class Game{
 		this.plotter.drawPosition(4*pos.x, 8*pos.y); // blows up the values of (x, y) to help differentiate from the other graph
 
 		this.data.storeFrames(this.frames);
-		// this.data.setComAndRow(this.columns,this.rows);
 		// this.data.setCellArray(this.grid);
 		this.data.populateArray();
 
 		this.frames++;
+
+		if (this.frames >= 7) {
+			if (this.selector.good(1,1) == true) {
+				console.log("hi");
+				this.stop();
+				// console.log(this.data.printPopSet());
+			}
+		}
 		
 		if (this.frames >= 30) {
 		 	this.stop();
