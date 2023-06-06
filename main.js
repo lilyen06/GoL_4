@@ -2,6 +2,7 @@
 
 var conway;//must be declared in the global scope to be accessed via HTML onclick attibute
 var plotter;
+var evolve;
 
 var can = document.querySelector("canvas"); //reference to our canvas
 
@@ -20,10 +21,12 @@ window.addEventListener("load", function(event) {
 	data = new DataSet();
 	selector = new Selector(data);
 	// creating and initializing a new plotter object
-	plotter = new Plotter(10, 10);
+	plotter = new Plotter(250, 135);
 	plotter.initialize();
+	// creating and initialiing a new Evolution object
+	evolve = new Evolution(plotter, data);
 	//instantiate game (columns, rows, cellsize, toroidal overlap)
-	conway = new Game(50, 40, 7, false, data, plotter, selector);
+	conway = new Game(50, 40, 7, false, data, plotter, evolve, selector);
 	data.setComAndRow(conway.columns, conway.rows);
 	data.setCellArray(conway.grid);
 	pattern = new Pattern(6,5,conway,10);
