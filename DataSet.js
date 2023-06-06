@@ -48,21 +48,11 @@ class DataSet {
             this.array[this.frames][2] = this.popCounter; //the third column stores population
     }
 
-    //pos x is column 0, pos y is column 1, population is column 2
-
-    // collectPop() {
-    //     let PopCounter = 0;
-    //     var i,j;
-    //     for (i = 0; i < this.rows; i++) {
-    //         for (j = 0; j < this.columns; j++) {
-    //             if (this.cellArray.isOn(i,j)) {
-    //                 PopCounter += 1;
-    //             }
-    //         }
-    //     }
-    //     PopCounter = this.array[this.frames][2];
-    //     return PopCounter;
-    // }
+    printPopSet() {
+        for (var i = (this.frames-5); i < this.frames; i++) {
+            console.log(this.array[i][2]);
+        }
+    }
 
     storeFrames(frames) {
         this.frames = frames;
@@ -76,16 +66,19 @@ class DataSet {
     }
 
     popConstant(number) {
-        let pop = this.array[this.frames][2];;
+        let pop = this.array[this.frames][2];
+        let constantCounter = 0;
         var i,j;
         if (this.popZero() == false) {
             for (i = (this.frames-5); i < this.frames; i++) {
                 for (j = 0; j < number; j++) {
                     if (((pop + j) == this.array[i-1][2])||((pop - j) == this.array[i-1][2])) {
-                        // console.log(pop);
-                        // console.log(j);
-                        // console.log(this.array[i-1][2]);
-                        return true;
+                        constantCounter += 1;
+                        console.log(pop);
+                        console.log(this.array[i-1][2]);
+                        if (constantCounter >= 4) {
+                            return true;
+                        }
                     }
                 }
             }
