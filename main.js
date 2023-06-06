@@ -24,8 +24,8 @@ window.addEventListener("load", function(event) {
 	plotter.initialize();
 	//instantiate game (columns, rows, cellsize, toroidal overlap)
 	conway = new Game(50, 40, 7, false, data, plotter, selector);
-	data.getComAndRow(conway.columns, conway.rows);
-	data.getCellArray(conway.grid);
+	data.setComAndRow(conway.columns, conway.rows);
+	data.setCellArray(conway.grid);
 	pattern = new Pattern(6,5,conway,10);
 	conway.initialize(pattern);
 });
