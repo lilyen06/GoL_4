@@ -264,7 +264,7 @@ class Game{
 	 */
 	updateHTML(){
 		document.getElementById("generation").innerHTML = "Cells alive: "+this.cellsAlive()+" Generation: "+this.frames;
-
+		document.getElementById("selection").innerHTML = "something";
 	}
 
 	/**
