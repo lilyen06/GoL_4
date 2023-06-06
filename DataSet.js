@@ -12,13 +12,21 @@ class DataSet {
         this.array = new Array(100).fill(null).map(() => new Array(3).fill(null));
     }
 
-    getComAndRow(columns, rows) {
+    setComAndRow(columns, rows) {
         this.columns = columns;
         this.rows = rows;
     }
 
-    getCellArray(cellArray) {
+    setCellArray(cellArray) {
         this.cellArray = cellArray;
+    }
+
+    getPosition(index) {
+        return (this.array[index][0],this.array[index][1]);
+    }
+
+    getPopulation(index) {
+        return this.array[index][0];
     }
 
     populateArray() {
