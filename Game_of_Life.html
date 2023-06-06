@@ -34,6 +34,7 @@
 			<a href = "https://www.w3schools.com/js/js_graphics_canvas.asp">JavaScript Canvas Tutorial</a>
 			<br><!--this is a line break tag-->
 			<canvas id="graph" style="width:100%;max-width:700px">Update your browser to display the canvas.</canvas>
+			<p id="selection">No selector Flag</p>
 		</div>
 		<!--RIGHT MARGIN 1/12 WIDE-->
 		<div class = "w3-col s1"><p> </p></div>
@@ -52,6 +53,8 @@
 		<button onclick="conway.clear()">Clear</button>
 		<button onclick="conway.drawLastPat()">Draw last pattern</button>
 		<button onclick="conway.reloop()">reloop</button>
+		<button onclick="conway.nextTrial()">Next Trial</button>
+		<!--button onclick="conway.mutateLast()">mutate last</button>
 
 	</footer>
 	
@@ -64,6 +67,8 @@
 	<script type="text/javascript" src="Plotter.js"></script>
 	<script type="text/javascript" src="Pattern.js"></script>
 	<script type="text/javascript" src="DataSet.js"></script>
+	<script type="text/javascript" src="Mutator.js"></script>
 	<script type="text/javascript" src="Selector.js"></script>
+	<script type="text/javascript" src="Evolution.js"></script>
 
 </html>

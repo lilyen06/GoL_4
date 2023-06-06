@@ -1,6 +1,6 @@
 class Game{
 	//declaration of instance variables is optional, but good practice 
-	grid; rows; columns; cellsize; frames; running;toroidal;pattern;
+	grid; rows; columns; cellsize; frames; running;toroidal;pattern;mutated;mutator;
 
 	/**
 	 * constructor is named as such and takes a similar form to that in Java
@@ -22,80 +22,13 @@ class Game{
 		this.data = data;
 		this.plotter = plotter; // assigns a the parameter plotter to a new class variable called plotter
 		this.selector = selector;
+		this.mutator = new Mutator(this); // instantiate a mutator
 	}
 
 	/**
 	 * intitiaizes the canvas
 	 */
 	initialize(){
-
-		// //glider -- in array coordinates array[y][x]
-		// this.grid.array[1][13].turnOn();
-		// this.grid.array[2][13].turnOn();
-		// this.grid.array[3][13].turnOn();
-		// this.grid.array[3][12].turnOn();
-		// this.grid.array[2][11].turnOn();
-		
-		// //random pattern
-		// this.grid.array[4][3].turnOn();
-		// this.grid.array[4][2].turnOn();
-		// this.grid.array[2][4].turnOn();
-		// this.grid.array[4][2].turnOn();
-		// this.grid.array[5][1].turnOn();
-		// this.grid.array[6][3].turnOn();
-		// this.grid.array[6][2].turnOn();
-		// this.grid.array[6][4].turnOn();
-		// this.grid.array[7][4].turnOn();
-		// this.grid.array[8][4].turnOn();
-		// this.grid.array[9][4].turnOn();
-		// this.grid.array[10][4].turnOn();
-		// this.grid.array[11][4].turnOn();
-		// this.grid.array[12][4].turnOn();
-		
-		//gosper glider gun
-
-		// //block
-		// this.grid.array[12][7].turnOn();
-		// this.grid.array[13][7].turnOn();
-		// this.grid.array[12][8].turnOn();
-		// this.grid.array[13][8].turnOn();
-
-		// //glider
-		// this.grid.array[18][7].turnOn();
-		// this.grid.array[18][8].turnOn();
-		// this.grid.array[18][9].turnOn();
-		// this.grid.array[19][9].turnOn();
-		// this.grid.array[20][8].turnOn();
-
-		// //ship
-		// this.grid.array[12][18].turnOn();
-		// this.grid.array[13][18].turnOn();
-		// this.grid.array[12][19].turnOn();	
-		// this.grid.array[14][19].turnOn();
-		// this.grid.array[13][20].turnOn();
-		// this.grid.array[14][20].turnOn();
-
-		// //glider	
-		// this.grid.array[17][42].turnOn();
-		// this.grid.array[18][41].turnOn();
-		// this.grid.array[17][43].turnOn();
-		// this.grid.array[18][42].turnOn();
-		// this.grid.array[19][43].turnOn();
-
-		// //ship
-		// this.grid.array[11][29].turnOn();
-		// this.grid.array[12][29].turnOn();		
-		// this.grid.array[12][30].turnOn();
-		// this.grid.array[10][30].turnOn();	
-		// this.grid.array[10][31].turnOn();
-		// this.grid.array[11][31].turnOn();
-
-		// //block
-		// this.grid.array[10][41].turnOn();
-		// this.grid.array[11][41].turnOn();
-		// this.grid.array[10][42].turnOn();
-		// this.grid.array[11][42].turnOn();
-
 		this.grid.draw();
 	 }
 
@@ -114,12 +47,74 @@ class Game{
 	 * Draw the last pattern generated
 	 */
 	drawLastPat(){
+		this.drawPat(this.pattern);
+	}
+
+	// /**
+	//  * mutates the last pattern generated
+	//  */
+	// mutateLast(){
+	// 	this.clear();
+	// 	let mutator = new Mutator(this);
+	// 	//this.pattern = mutator.moveLonely(this.pattern);
+	// 	//this.pattern = mutator.addPoint(this.pattern);
+	// 	this.pattern = mutator.killPoint(this.pattern);
+	// 	this.drawPat(this.pattern);
+	// }
+
+	/**
+	 * Mutate and reloop the pattern until isolating one with a constant population and changing position
+	 */
+	mutate(){
+		//while(this.frames<frames){}
+		// if Selector's dismiss is triggered, or a pattern has been mutated 5 times, generate and mutate a new pattern
+		if (this.selector.dismiss(5,5)||this.mutated>=5){
+			console.log('Dismiss');
+			this.reloop();
+			this.mutated = 0;
+		} 
+		// if Selector's chaos is triggered, mutate the pattern based on how many mutations it has already undergone
+		else if (this.selector.chaos(5,5)){
+			if (this.mutated <=3){
+				this.pattern = this.mutator.addPoint(this.pattern);
+				this.clear();
+				this.drawLastPat();
+				this.mutated++;
+			} else {
+				this.pattern = this.mutator.killPoint(this.pattern);
+				this.clear();
+				this.drawLastPat();
+				this.mutated++;
+			}
+		}
+		// if Selector's good for a larger range is triggered, check if it is a perfect match, if not moveLonely, if yes draw the pattern and stop the game
+		else if (this.selector.good(5,5)){
+			if (!this.selector.good(0,0)){
+				console.log("found almost pat!");
+				this.pattern = this.mutator.moveLonely(this.pattern);
+				this.clear();
+				this.drawLastPat();
+				this.mutated++;
+			} else {
+				console.log("found pat!!!");
+				this.clear();
+				this.drawLastPat();
+				this.stop();
+			}
+		} 
+	}
+
+	/**
+	 * Draws the pattern fed into the function
+	 * @param {CellArray} pattern 
+	 */
+	drawPat(pattern){
 		let r, c;
 		// loop through all cells
 		for (r = 0; r < this.rows; r++) {
 			for (c = 0; c < this.columns; c++) {
 				// transcribe on pattern cells to grid pattern cells
-				if (this.pattern.isOn(r,c)){
+				if (pattern.isOn(r,c)){
 					this.grid.turnOn(r,c);
 				}
 			}
@@ -169,7 +164,7 @@ class Game{
 	 * updates the game with the new neighbors count
 	 */
 	update() {
-		let count = this.countNeighbors();
+		let count = this.grid.countNeighbors();
 		this.updateGrid(count);
 	}
 
@@ -203,89 +198,13 @@ class Game{
 				}
 		}
 	}
-  
-	/**
-	 * populates the counts[][] with the countAlive values
-	 * @returns counts Array
-	 */
-	countNeighbors() {
-		let counts =  new Array(this.rows).fill(null).map(() => new Array(this.columns).fill(null));// builds an empty 2d array in JavaScript
-			//loops through our cell array and stores the counts of each cell in the int array
-			let r, c; 
-			for (r = 0; r < this.rows; r++) {
-				for (c = 0; c < this.columns; c++) {
-					counts[r][c] = this.countAlive(r, c);
-				}
-
-			}
-		return counts;
-	}
-
-	/**
-	 * return the number of cells alive in this update
-	 * @returns sum of cells alive (int)
-	 */
-	cellsAlive(){
-		//loops through CellArray and sums all currently alive cells
-		let r, c, sum = 0;
-		for (r = 0; r < this.rows; r++) {
-			for (c = 0; c < this.columns; c++) {
-				if(this.grid.isOn(r,c)){
-					sum++;
-				}
-			}
-		}
-		return sum;
-	} 
 
 	/**
 	 * helper function to update the html elements
 	 */
 	updateHTML(){
-		document.getElementById("generation").innerHTML = "Cells alive: "+this.cellsAlive()+" Generation: "+this.frames;
+		document.getElementById("generation").innerHTML = "Cells alive: "+this.grid.cellsAlive()+" Generation: "+this.frames;
 
-	}
-
-	/**
-	 * Counts and returns the live cells in the 8 cell perimeter
-	 * @param {int} r 
-	 * @param {int} c 
-	 * @returns int count
-	 */
-	countAlive(r, c) {
-		let count = 0;
-		count += this.grid.test(r - 1, c - 1);
-		count += this.grid.test(r - 1, c);
-		count += this.grid.test(r - 1, c + 1);
-		count += this.grid.test(r, c - 1);
-		count += this.grid.test(r, c + 1);
-		count += this.grid.test(r + 1, c - 1);
-		count += this.grid.test(r + 1, c);
-		count += this.grid.test(r + 1, c + 1);
-		return count;
-	}
-
-	/**
-   * uses nested or loops to find the sum of all x and all y positions of alive cells
-	 * called as this.avgPos()
-	 * @returns the average value of the x and y position of all alive cells
-	 */
-	avgPos(){
-		let allX=0;
-		let allY=0;
-		for(let i = 0; i<this.rows; i++){
-			for(let j = 0; j<this.columns; j++){
-				if(this.grid.isOn(i, j)){
-					allX+=j;
-					allY+=i;
-				}
-			}
-		}
-		return {
-			// returns the average
-			x: allX/this.cellsAlive(),
-			y: allY/this.cellsAlive()
-		};
 	}
   
   /*
@@ -308,14 +227,16 @@ class Game{
 		// initialize a graph on the canvas
 		this.plotter.initialize();
 		// plots the population-frames graph
-		this.plotter.drawPop(this.frames, 2*this.cellsAlive());
+		this.plotter.drawPop(this.frames, 2*this.grid.cellsAlive());
 		// plots the average position
-		var pos = this.avgPos();
-		this.plotter.drawPosition(4*pos.x, 8*pos.y); // blows up the values of (x, y) to help differentiate from the other graph
+		var pos = this.grid.avgPos();
+		this.plotter.drawPosition(pos.x, pos.y);
 
 		this.data.storeFrames(this.frames);
 		// this.data.setCellArray(this.grid);
 		this.data.populateArray();
+
+		console.log(this.data.getPosition(this.frames));
 
 		this.frames++;
 

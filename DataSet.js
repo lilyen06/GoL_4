@@ -1,10 +1,12 @@
 class DataSet {
 
     constructor() {
-        this.frames;
+        this.popCounter;
+        this.frames;//
         this.cellArray;
         this.columns;
         this.rows;
+        this.array = new Array(100).fill(null).map(() => new Array(3).fill(null)); //build an empty three column array
         this.population;
         this.position;
         this.array = new Array(100).fill(null).map(() => new Array(3).fill(null));
@@ -28,10 +30,11 @@ class DataSet {
     }
 
     populateArray() {
-        this.popCounter = 0;
-        let RowSum = 0;
-        let ColumnSum = 0;
-        var i,j;
+            this.popCounter = 0;
+            let RowSum = 0;
+            let ColumnSum = 0;
+            var i,j;
+            console.log(this.rows);
             for (i = 0; i < this.rows; i++) {
                 for (j = 0; j < this.columns; j++) {
                     if (this.cellArray.isOn(i,j)) {
@@ -46,6 +49,7 @@ class DataSet {
             this.array[this.frames][0] = x; //the first column of the array stores ave x position
             this.array[this.frames][1] = y; //the second column of the array stores ave y position
             this.array[this.frames][2] = this.popCounter; //the third column stores population
+       
     }
 
     printPopSet() {
@@ -58,8 +62,13 @@ class DataSet {
         this.frames = frames;
     }
 
-    popWacky(number) {
-        if (this.popConstant(number) == false && this.popZero() == false) {
+    collectPop() {
+        this.popCounter = this.array[this.frames][2];
+        return this.popCounter;
+    }
+
+    popWacky() {
+        if (this.popConstant() == false && this.popZero() == false) {
             return true;
         }
         return false;
@@ -83,7 +92,7 @@ class DataSet {
                 }
             }
         }
-        return false;
+            return false;
     }
 
     popZero() {
@@ -105,35 +114,34 @@ class DataSet {
         }
         yAve = Math.round(yPos/this.frames);
         xAve = Math.round(xPos/this.frames);
-        return (xAve,yAve);
+        console.log("Hi");
+        console.log(xAve);
+        console.log(yAve); 
+        return {
+            x: xAve,
+            y: yAve
+        };
     }
 
-    diffPosition(number) {
-        let yPos = this.array[this.frames][1];;
-        let xPos = this.array[this.frames][0];
-        var i,j;
-        for (i = (this.frames-5); i < this.frames; i++) {
-            for (j = 0; j < number; j++) {
-                if (((yPos + j) == this.array[i-1][1])||((yPos - j) == this.array[i-1][1])) {
-                    if (((xPos + j) == this.array[i-1][0])||((xPos - j) == this.array[i-1][0])) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-    }
-
-    samePosition(number) {
-        if (this.diffPosition(number) == false) {
+    diffPosition() {
+        if (this.samePosition() == false) {
             return true;
         }
         return false;
     }
 
+    samePosition() {
+        let pos = 0;
+        var i,j;
+        for (i = (this.frames-10); i < this.frames; i++) {
+            pos = this.array[i][2];
+            for (j = 0; j < 3; j++) {
+                if (((pos + j) == this.array[i-1][2])||((pos - j) == this.array[i-1][2])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
 }
-//store frames method with paramter frames assigned to this.frames
-//call store frames in game loop
-//determine if pop is constant growing or goes to zero (three methods)
-//determine average position, if it is changing, or staying relatively the same
-//selector should be able to ask using those methods
