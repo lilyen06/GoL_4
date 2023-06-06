@@ -83,8 +83,6 @@ class DataSet {
                 for (j = 0; j < number; j++) {
                     if (((pop + j) == this.array[i-1][2])||((pop - j) == this.array[i-1][2])) {
                         constantCounter += 1;
-                        console.log(pop);
-                        console.log(this.array[i-1][2]);
                         if (constantCounter >= 4) {
                             return true;
                         }
