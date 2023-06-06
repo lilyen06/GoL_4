@@ -28,9 +28,6 @@ class Selector {
     //same population and changing position, very good
     good(popNumber, posNumber) {
         if ((this.data.diffPosition(posNumber) == true) && (this.data.popConstant(popNumber) == true)) {
-            if (this.data.diffPosition(posNumber) == true) {
-            } if (this.data.popConstant(popNumber) == true) {
-            }
             return true;
         } return false;
     }
