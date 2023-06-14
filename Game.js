@@ -47,29 +47,9 @@ class Game{
 	}
 
 	/**
-	 * Draw the last pattern generated
-	 */
-	drawLastPat(){
-		this.drawPat(this.pattern);
-	}
-
-	// /**
-	//  * mutates the last pattern generated
-	//  */
-	// mutateLast(){
-	// 	this.clear();
-	// 	let mutator = new Mutator(this);
-	// 	//this.pattern = mutator.moveLonely(this.pattern);
-	// 	//this.pattern = mutator.addPoint(this.pattern);
-	// 	this.pattern = mutator.killPoint(this.pattern);
-	// 	this.drawPat(this.pattern);
-	// }
-
-	/**
 	 * Mutate and reloop the pattern until isolating one with a constant population and changing position
 	 */
 	mutate(){
-		//while(this.frames<frames){}
 		// if Selector's dismiss is triggered, or a pattern has been mutated 5 times, generate and mutate a new pattern
 		if (this.selector.dismiss(5,5)||this.mutated>=5){
 			console.log('Dismiss');
@@ -81,12 +61,12 @@ class Game{
 			if (this.mutated <=3){
 				this.pattern = this.mutator.addPoint(this.pattern);
 				this.clear();
-				this.drawLastPat();
+				this.drawPat(this.pattern);
 				this.mutated++;
 			} else {
 				this.pattern = this.mutator.killPoint(this.pattern);
 				this.clear();
-				this.drawLastPat();
+				this.drawPat(this.pattern);
 				this.mutated++;
 			}
 		}
@@ -96,12 +76,12 @@ class Game{
 				console.log("found almost pat!");
 				this.pattern = this.mutator.moveLonely(this.pattern);
 				this.clear();
-				this.drawLastPat();
+				this.drawPat(this.pattern);
 				this.mutated++;
 			} else {
 				console.log("found pat!!!");
 				this.clear();
-				this.drawLastPat();
+				this.drawPat(this.pattern);
 				this.stop();
 			}
 		} 
