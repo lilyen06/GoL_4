@@ -249,7 +249,7 @@ class Game{
 		// initialize a graph on the canvas
 		this.plotter.initialize();
 		// plots the population-frames graph
-		this.plotter.drawPop(this.frames, this.cellsAlive());
+		this.plotter.drawPop(this.frames, this.grid.cellsAlive());
 		// plots the average position
 		this.plotter.drawPosition(this.data.array[this.frames][0], this.data.array[this.frames][1]);
 
