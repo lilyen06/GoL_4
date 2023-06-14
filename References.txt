@@ -13,16 +13,16 @@ drawpat
 clear
 
 Game nextTrial()
-	Definition and Usage
+	Definition and Usage:
 		The nextTrial() method first clears the grid and then clears the plotter after two patterns have been displayed.
 
-	Syntax
-		plotter.initialize();
+	Syntax:
+		Game.nextTrial();
 
-	Parameters
+	Parameters:
 		None.
 
-	Return Value
+	Return Value:
 		None.
 
 Mutator Functions:
