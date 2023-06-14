@@ -1,6 +1,6 @@
 class Game{
 	//declaration of instance variables is optional, but good practice 
-	grid; rows; columns; cellsize; frames; running;toroidal;pattern;mutated;mutator;
+	grid; rows; columns; cellsize; frames; running;toroidal;pattern;mutated;mutator;selector;
 
 	/**
 	 * constructor is named as such and takes a similar form to that in Java
@@ -8,10 +8,12 @@ class Game{
 	 * @param {int} rows 
 	 * @param {int} cellsize 
 	 * @param {boolean} toroidal 
-	 * @param {dataSet} data
-	 * @param {plotter} plotter
+	 * @param {DataSet} data
+	 * @param {Plotter} plotter
+	 * @param {Evolution} evolve
+	 * @param {Selector} selector
 	 */
-	constructor(columns, rows, cellsize, toroidal, data, plotter, selector){
+	constructor(columns, rows, cellsize, toroidal, data, plotter, evolve, selector){
 		this.columns = columns;
 		this.rows = rows;
 		this.cellsize = cellsize;
@@ -22,6 +24,7 @@ class Game{
 		this.data = data;
 		this.plotter = plotter; // assigns a the parameter plotter to a new class variable called plotter
 		this.selector = selector;
+		this.evolve = evolve;
 		this.mutator = new Mutator(this); // instantiate a mutator
 	}
 
@@ -44,29 +47,9 @@ class Game{
 	}
 
 	/**
-	 * Draw the last pattern generated
-	 */
-	drawLastPat(){
-		this.drawPat(this.pattern);
-	}
-
-	// /**
-	//  * mutates the last pattern generated
-	//  */
-	// mutateLast(){
-	// 	this.clear();
-	// 	let mutator = new Mutator(this);
-	// 	//this.pattern = mutator.moveLonely(this.pattern);
-	// 	//this.pattern = mutator.addPoint(this.pattern);
-	// 	this.pattern = mutator.killPoint(this.pattern);
-	// 	this.drawPat(this.pattern);
-	// }
-
-	/**
 	 * Mutate and reloop the pattern until isolating one with a constant population and changing position
 	 */
 	mutate(){
-		//while(this.frames<frames){}
 		// if Selector's dismiss is triggered, or a pattern has been mutated 5 times, generate and mutate a new pattern
 		if (this.selector.dismiss(5,5)||this.mutated>=5){
 			console.log('Dismiss');
@@ -78,12 +61,12 @@ class Game{
 			if (this.mutated <=3){
 				this.pattern = this.mutator.addPoint(this.pattern);
 				this.clear();
-				this.drawLastPat();
+				this.drawPat(this.pattern);
 				this.mutated++;
 			} else {
 				this.pattern = this.mutator.killPoint(this.pattern);
 				this.clear();
-				this.drawLastPat();
+				this.drawPat(this.pattern);
 				this.mutated++;
 			}
 		}
@@ -93,12 +76,12 @@ class Game{
 				console.log("found almost pat!");
 				this.pattern = this.mutator.moveLonely(this.pattern);
 				this.clear();
-				this.drawLastPat();
+				this.drawPat(this.pattern);
 				this.mutated++;
 			} else {
 				console.log("found pat!!!");
 				this.clear();
-				this.drawLastPat();
+				this.drawPat(this.pattern);
 				this.stop();
 			}
 		} 
@@ -157,7 +140,27 @@ class Game{
 		// reset operator interface
 		this.frames = 0;
 		this.grid.draw();
-		this.plotter.clear();
+	}
+	
+	nextTrial(){
+		// first clear the grid without clearing the plotter
+		let r, c;
+		// loop through all cells
+		for (r = 0; r < this.rows; r++) {
+			for (c = 0; c < this.columns; c++) {
+				// turn off given cell
+				this.grid.turnOff(r, c);
+			}
+		}
+		// reset operator interface
+		this.frames = 0;
+		this.grid.draw();
+		// turning the current trial to black
+		//this.evolve.drawOnPop();
+		//console.log(8);
+		if(this.frames==0 && this.evolve.reset==0){
+			this.clear();
+		}
 	}
 	
 	/**
@@ -227,10 +230,9 @@ class Game{
 		// initialize a graph on the canvas
 		this.plotter.initialize();
 		// plots the population-frames graph
-		this.plotter.drawPop(this.frames, 2*this.grid.cellsAlive());
+		this.plotter.drawPop(this.frames, this.grid.cellsAlive());
 		// plots the average position
-		var pos = this.grid.avgPos();
-		this.plotter.drawPosition(pos.x, pos.y);
+		this.plotter.drawPosition(this.data.array[this.frames][0], this.data.array[this.frames][1]);
 
 		this.data.storeFrames(this.frames);
 		// this.data.setCellArray(this.grid);
@@ -239,25 +241,14 @@ class Game{
 		console.log(this.data.getPosition(this.frames));
 
 		this.frames++;
-
-		if (this.frames >= 7) {
-			if (this.selector.good(1,1) == true) {
-				console.log("hi");
-				this.stop();
-				// console.log(this.data.printPopSet());
-			}
-		}
 		
-		if (this.frames >= 30) {
-		 	this.stop();
-			// console.log(this.selector.dismiss(5,5));
-			// console.log(this.selector.tierTwo(5,5));
-			// console.log(this.selector.good(5,5));
-			// console.log(this.selector.chaos(5,5));
-			console.log(this.data.getPosition(23));
-			console.log(this.data.getPopulation(23));
-		// 	//this.reloop(); // uncomment for automatic relooping
-		// 	// this.data.storeFrames(this.frames);
+		if (this.frames >= 100||(this.frames>6 && this.selector.dismiss())){
+			if(this.evolve.reset%2==0){
+				this.evolve.reset=1;
+				this.plotter.clear();
+			}
+			this.evolve.test();
+			this.mutate();
 		}
 		
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
