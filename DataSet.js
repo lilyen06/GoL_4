@@ -9,7 +9,6 @@ class DataSet {
         this.array = new Array(100).fill(null).map(() => new Array(3).fill(null)); //build an empty three column array
         this.population;
         this.position;
-        this.array = new Array(100).fill(null).map(() => new Array(3).fill(null));
     }
 
     setComAndRow(columns, rows) {
@@ -34,7 +33,6 @@ class DataSet {
             let RowSum = 0;
             let ColumnSum = 0;
             var i,j;
-            console.log(this.rows);
             for (i = 0; i < this.rows; i++) {
                 for (j = 0; j < this.columns; j++) {
                     if (this.cellArray.isOn(i,j)) {
@@ -49,7 +47,6 @@ class DataSet {
             this.array[this.frames][0] = x; //the first column of the array stores ave x position
             this.array[this.frames][1] = y; //the second column of the array stores ave y position
             this.array[this.frames][2] = this.popCounter; //the third column stores population
-            console.log(this.array[this.frames][2]);
     }
 
     printPopSet() {
@@ -112,9 +109,6 @@ class DataSet {
         }
         yAve = Math.round(yPos/this.frames);
         xAve = Math.round(xPos/this.frames);
-        // console.log("Hi");
-        // console.log(xAve);
-        // console.log(yAve); 
         return {
             x: xAve,
             y: yAve

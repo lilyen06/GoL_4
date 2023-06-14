@@ -29,7 +29,9 @@ class Selector {
     //tracking sets of three as we go
     good(popNumber, posNumber) {
         if ((this.data.diffPosition(posNumber) == true) && (this.data.popConstant(popNumber) == true)) {
-            return true;
+            if (this.data.linearMotion(popNumber, posNumber)) {
+                return true;
+            }
         } return false;
     }
 
@@ -40,9 +42,19 @@ class Selector {
         } return false;
     }
 
-    // linearMotion(popNumber, posNumber) {
-    //     // if () {
-
-    //     // }
-    // }
+    linearMotion(popNumber, posNumber) {
+        var slope1;
+        var slope2;
+        var deltay;
+        var deltax;
+        deltay = (this.data.array[this.frames][1] - this.data.array[this.frames-1][1]);
+        deltax = (this.data.array[this.frames][0] - this.data.array[this.frames-1][0]);
+        slope1 = (deltay/deltax);
+        deltay = (this.data.array[this.frames-1][1] - this.data.array[this.frames-2][1]);
+        deltax = (this.data.array[this.frames-1][0] - this.data.array[this.frames-2][0]);
+        slope2 = (deltay/deltax);
+        if (slope1 == slope2) {
+            return true;
+        }
+    }
 }
