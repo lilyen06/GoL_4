@@ -8,9 +8,15 @@ DataSet functions:
 
 
 Game functions:
-mutate
-drawpat
-clear
+    Syntax: Game.mutate()
+        Description: uses Selector to decide how to mutate a pattern and then mutates the pattern
+    
+    Syntax: Game.drawPat(pattern)
+        Description: Draws the CellArray passed to it on the game grid
+        Parameters: pattern: A CellArray to be drawn
+
+    Syntax: Game.clear()
+        Description: Turns off any cells that are on in the grid and reset the frames (generation)
 
 Game nextTrial()
 	Definition and Usage:
