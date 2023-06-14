@@ -12,6 +12,19 @@ mutate
 drawpat
 clear
 
+Game nextTrial()
+	Definition and Usage
+		The nextTrial() method first clears the grid and then clears the plotter after two patterns have been displayed.
+
+	Syntax
+		plotter.initialize();
+
+	Parameters
+		None.
+
+	Return Value
+		None.
+
 Mutator Functions:
     Syntax: new Mutator()
         Description: instantiates a Mutator
