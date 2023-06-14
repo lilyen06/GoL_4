@@ -160,7 +160,6 @@ class Game{
 		// reset operator interface
 		this.frames = 0;
 		this.grid.draw();
-		this.plotter.clear();
 	}
 	
 	nextTrial(){
@@ -265,8 +264,8 @@ class Game{
 		
 		if (this.frames >= 100){
 			if(this.evolve.reset%2==0){
-				this.evolve.reset=0;
-				this.clear();
+				this.evolve.reset=1;
+				this.plotter.clear();
 			}
 			this.evolve.test();
 			this.mutate();
