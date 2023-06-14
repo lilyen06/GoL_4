@@ -242,7 +242,7 @@ class Game{
 
 		this.frames++;
 		
-		if (this.frames >= 100){
+		if (this.frames >= 100||(this.frames>6 && this.selector.dismiss())){
 			if(this.evolve.reset%2==0){
 				this.evolve.reset=1;
 				this.plotter.clear();
