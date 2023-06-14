@@ -8,8 +8,10 @@ class Game{
 	 * @param {int} rows 
 	 * @param {int} cellsize 
 	 * @param {boolean} toroidal 
-	 * @param {dataSet} data
-	 * @param {plotter} plotter
+	 * @param {DataSet} data
+	 * @param {Plotter} plotter
+	 * @param {Evolution} evolve
+	 * @param {Selector} selector
 	 */
 	constructor(columns, rows, cellsize, toroidal, data, plotter, evolve, selector){
 		this.columns = columns;
