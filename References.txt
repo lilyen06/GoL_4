@@ -66,7 +66,183 @@ Pattern Functions:
         Description: Populates and draws a random pattern
         Return: CellArray (grid) of pattern
 
-Plotter Functions:
+Plotter Class Methods and Properties:
+
+NAME							DESCRIPTION
+
+constructor(x, y)				Instantiates the values of an instance of a class (the length of the axes)
+
+initialize()					Draws X and Y axes using the values from the constructor
+
+drawPop(x, y)					Draws the points on the X and Y axes where the Y represents population and X represents generation (frames)
+
+drawPosition(x, y)				Draws the points on the axes where the X and Y represents the average and Y position of all alive cells
+
+clear()							Clears the entire canvas
+
+
+Plotter constructor()
+	Definition and Usage
+		The constructor() of a Plotter object instantiates the length of the axes (in pixels)
+
+	Syntax
+		new Plotter(xAxis, yAxis);
+
+	Parameters
+
+		PARAMETER			DESCRIPTION
+		xAxis				Required.
+							The length of the x-axis in pixels (i.e. 250).
+
+		yAxis				Required.
+							The length of the y-axis in pixels (i.e. 135).
+
+	Return Value
+		None.
+
+Plotter initialize()
+	Definition and Usage
+		The initialize() method draws the x and y axes from the values instantiated by the constructor()
+		The initialize() method draws the y-axis from (20, 20) to (20, this.yAxis)
+		The initialize() method draws the x-axis from (20, this.yAxis) to (this.xAxis, this.yAxis)
+			Where this.xAxis and this.yAxis are values instantiated in or passed to the constructor
+
+	Syntax
+		plotter.initialize();
+
+	Parameters
+		None.
+
+	Return Value
+		None.
+
+Plotter drawPop()
+	Definition and Usage
+		The drawPop() method draws a rectangle with size (1, 1) at a point given by the parameters on the Generation Plotter axes in blue
+		The drawPop() method is adjusted to make the origin be the bottom-left of the canvas
+
+	Syntax
+		plotter.drawPop(x-value, y-value);
+
+	Parameters
+
+		PARAMETER			DESCRIPTION
+		x-value				Required.
+							The x value of a coordinate.
+
+		y-value				Required.
+							The y value of a coordinate.
+
+	Return Value
+		None.
+
+Plotter drawPosition()
+	Definition and Usage
+		The drawPosition() method draws a rectangle with size (1, 1) at a point given by the parameters on the Generation Plotter axes in red
+		The drawPosition() method is not adjusted to make the origin at the bottom-left of the canvas
+
+	Syntax
+		plotter.drawPosition(x-value, y-value);
+
+	Parameters
+
+		PARAMETER			DESCRIPTION
+		x-value				Required.
+							The x value of a coordinate.
+
+		y-value				Required.
+							The y value of a coordinate (origin is at the top-left).
+
+	Return Value
+		None.
+
+Plotter clear()
+	Definition and Usage
+		The clear() method clears te entire Generation Plotter canvas
+
+	Syntax
+		plotter.clear();
+
+	Parameters
+		None.
+
+	Return Value
+		None.
 
 
 Selector Functions:
+
+
+Evolution Class Methods and Properties:
+
+NAME								DESCRIPTION
+
+constructor(plotter, dataset)		Instantiates the instance variable of an Evolution object
+
+test()								Runs the drawOnPop() and drawOnPos() methods
+
+drawOnPop()							Draws over the current population plotter with black fillStyle
+
+drawOnPop()							Draws over the current position plotter with black fillStyle
+
+
+Evolution constructor()
+	Definition and Usage
+		The constructor() of an Evolution object instantiates the plot, dataSet, trial, and reset variables.
+		Sets the local trial variable to the array instance variable of the DataSet passed to the constructor.
+		Sets the local reset variable to 1.
+
+	Syntax
+		new Evolution(Plotter, DataSet);
+
+	Parameters
+
+		PARAMETER			DESCRIPTION
+		plotter				Required.
+							A Plotter object. Set to this.plot
+
+		dataSet				Required.
+							A DataSet object. Set to this.dataSet
+
+	Return Value
+		None.
+
+Evolution test()
+	Definition and Usage
+		Calls both drawOnPop() and drawOnPos() methods.
+		Increments the class variable, reset.
+
+	Syntax
+		evolution.test();
+
+	Parameter
+		None.
+
+	Return Value
+		None.
+
+Evolution drawOnPop()
+	Definition and Usage
+		Using the collected data of the current trial from the DataSet object passed to the contructor to redraw the points of the population to frames graph on the Generation Plotter in black to show the difference between this trial and the next.
+
+	Syntax
+		evolution.drawOnPop();
+
+	Parameters
+		None.
+
+	Return Value
+		None.
+
+Evolution drawOnPos()
+	Definition and Usage
+		Using the collected data of the current trial from the DataSet object passed to te contructor to redraw the points of the average position graph on the Generation Plotter in black to show the difference between this trial and the next.
+
+	Syntax
+		evolution.drawOnTop();
+
+	Parameters
+		None.
+
+	Return Value
+		None.
