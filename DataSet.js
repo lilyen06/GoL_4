@@ -49,7 +49,7 @@ class DataSet {
             this.array[this.frames][0] = x; //the first column of the array stores ave x position
             this.array[this.frames][1] = y; //the second column of the array stores ave y position
             this.array[this.frames][2] = this.popCounter; //the third column stores population
-       
+            console.log(this.array[this.frames][2]);
     }
 
     printPopSet() {
@@ -114,9 +114,9 @@ class DataSet {
         }
         yAve = Math.round(yPos/this.frames);
         xAve = Math.round(xPos/this.frames);
-        console.log("Hi");
-        console.log(xAve);
-        console.log(yAve); 
+        // console.log("Hi");
+        // console.log(xAve);
+        // console.log(yAve); 
         return {
             x: xAve,
             y: yAve

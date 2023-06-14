@@ -39,4 +39,10 @@ class Selector {
             return true;
         } return false;
     }
+
+    // linearMotion(popNumber, posNumber) {
+    //     // if () {
+
+    //     // }
+    // }
 }
