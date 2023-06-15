@@ -5,7 +5,7 @@ class Evolution{
 	 * Construct an Evolution object with assigned plotter and dataset objects passed to it
 	 * called as Evoliution(Plotter plotter, DataSet dataset)
 	 * @param {int} plotter 
-	 * @param {int} ydataset
+	 * @param {int} dataset
 	 */
     constructor(plotter, dataset){
         // instantiates the instance variables
