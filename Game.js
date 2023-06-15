@@ -142,27 +142,6 @@ class Game{
 		this.grid.draw();
 	}
 	
-	nextTrial(){
-		// first clear the grid without clearing the plotter
-		let r, c;
-		// loop through all cells
-		for (r = 0; r < this.rows; r++) {
-			for (c = 0; c < this.columns; c++) {
-				// turn off given cell
-				this.grid.turnOff(r, c);
-			}
-		}
-		// reset operator interface
-		this.frames = 0;
-		this.grid.draw();
-		// turning the current trial to black
-		//this.evolve.drawOnPop();
-		//console.log(8);
-		if(this.frames==0 && this.evolve.reset==0){
-			this.clear();
-		}
-	}
-	
 	/**
 	 * updates the game with the new neighbors count
 	 */
@@ -232,13 +211,11 @@ class Game{
 		// plots the population-frames graph
 		this.plotter.drawPop(this.frames, this.grid.cellsAlive());
 		// plots the average position
-		this.plotter.drawPosition(this.data.array[this.frames][0], this.data.array[this.frames][1]);
+		this.plotter.drawPosition(this.data.avePosition().x, this.data.avePosition().y);
 
 		this.data.storeFrames(this.frames);
 		// this.data.setCellArray(this.grid);
 		this.data.populateArray();
-
-		console.log(this.data.getPosition(this.frames));
 
 		this.frames++;
 		
@@ -247,8 +224,9 @@ class Game{
 				this.evolve.reset=1;
 				this.plotter.clear();
 			}
-			this.evolve.test();
 			this.mutate();
+			this.evolve.test();
+			this.frames = 0;
 		}
 		
 		//timeout to call animation frame to restart the loop -- 1000/60 is 60 fps
