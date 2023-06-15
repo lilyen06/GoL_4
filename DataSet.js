@@ -1,8 +1,12 @@
 class DataSet {
 
+    /**
+	 * Construct a DataSet object
+	 * called as DataSet()
+	 */
     constructor() {
         this.popCounter;
-        this.frames;//
+        this.frames;
         this.cellArray;
         this.columns;
         this.rows;
@@ -50,7 +54,7 @@ class DataSet {
     }
 
     printPopSet() {
-        for (var i = (this.frames-5); i < this.frames; i++) {
+        for (var i = (this.frames-5); i <= this.frames; i++) {
             console.log(this.array[i][2]);
         }
     }
@@ -64,8 +68,8 @@ class DataSet {
         return this.popCounter;
     }
 
-    popWacky() {
-        if (this.popConstant() == false && this.popZero() == false) {
+    popWacky(number) {
+        if (this.popConstant(number) == false && this.popZero() == false) {
             return true;
         }
         return false;
@@ -76,11 +80,11 @@ class DataSet {
         let constantCounter = 0;
         var i,j;
         if (this.popZero() == false) {
-            for (i = (this.frames-5); i < this.frames; i++) {
+            for (i = (this.frames-5); i <= this.frames; i++) {
                 for (j = 0; j <= number; j++) {
-                    if (((pop + j) == this.array[i-1][2])||((pop - j) == this.array[i-1][2])) {
+                    if (((pop + j) == this.array[i-1][2])||((pop - j) == this.array[i-1][2])) { //compares the population to that of previous frames
                         constantCounter += 1;
-                        if (constantCounter >= 4) {
+                        if (constantCounter >= 3) { //checks if the population has been constant for at least three of the five frames
                             return true;
                         }
                     }
@@ -104,9 +108,10 @@ class DataSet {
         let xAve = 0;
         var i;
         for (i = 0; i < this.frames; i++) {
-            yPos += this.array[i][1];
-            xPos += this.array[i][0];
+            yPos += this.array[i][1]; //adds y the position for each frame
+            xPos += this.array[i][0]; //adds the x position for each frame
         }
+        //calculates averages
         yAve = Math.round(yPos/this.frames);
         xAve = Math.round(xPos/this.frames);
         return {
@@ -127,35 +132,28 @@ class DataSet {
         var posy = this.array[this.frames][1];
         var i;
         for (i = (this.frames-4); i < this.frames; i++) {
-            if ((posx == this.array[i-1][0]) && ( posy == this.array[i-1][1])) {
+            if ((posx == this.array[i][0]) && ( posy == this.array[i][1])) { //checks if both x and y position are equal to at least one of past three frames
                     return true;
             }
             return false;
         }
     }
 
-// linear motion function taken out after much experimenting because the slope was not actually the same with a glider, it would vary between slope of one and zero and dividing by zero was not doable, so although it could have been modified to accomodate this it would not be effective with respect to gliders
+    //gliders don't actually have the same slope they follow a pattern of every two frames having delta ys and xs of one or zero
+    //function mostly rules out false patterns
     linearMotion() {
         var deltay1;
         var deltax1;
         var deltay2;
         var deltax2;
-        var deltay3;
-        var deltax3;
-        var deltay4;
-        var deltax4;
+        //finds the differences in x and y over the past two frames
         deltay1 = (this.array[this.frames][1] - this.array[this.frames-1][1]);
         deltax1 = (this.array[this.frames][0] - this.array[this.frames-1][0]);
+        //finds the differences in x and y over the second and third most recent frames
         deltay2 = (this.array[this.frames-1][1] - this.array[this.frames-2][1]);
         deltax2 = (this.array[this.frames-1][0] - this.array[this.frames-2][0]);
-        deltay3 = (this.array[this.frames-2][1] - this.array[this.frames-3][1]);
-        deltax3 = (this.array[this.frames-2][0] - this.array[this.frames-3][0]);
-        deltay4 = (this.array[this.frames-3][1] - this.array[this.frames-4][1]);
-        deltax4 = (this.array[this.frames-3][0] - this.array[this.frames-4][0]);
         if ((deltay1 = 1) || (deltax1 = 1) || (deltay2 == 1) || (deltax2 == 1)) {
-            if (((deltay3 = 1) || (deltax3 = 1) || (deltay4 == 1) || (deltax4 == 1))) {
                 return true;
-            }
         }
     }
 

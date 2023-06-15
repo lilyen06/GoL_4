@@ -6,6 +6,60 @@ CellArray functions:
 
 DataSet functions:
 
+constructor() Builds a class by instantiating instance variables
+	Creates: this.popCounter, this.frames, this.cellArray, this.columns, this.rows, and this.array
+	Syntax: new DataSet()
+
+setComAndRow(columns,rows) Sets the number of columns and rows to corresponding instance variables
+	Parameters:
+	columns		number of columns in grid
+	rows		number of rows in grid
+
+setCellArray(cellArray) Sets the cell array to corresponding instance variable
+	Parameters:
+	cellArray	a cell array class
+
+getPosition(index) Gets the y and x position at a certain number of frames
+	Return: 	object with x and y position
+
+getPopulation (index) Gets the population at a certain number of frames
+	Return: number
+
+populateArray() Adds a value to each column in the array -- average x position, y position, and population
+
+printPopSet() Prints the population for each of the last five frames
+
+storeFrames() Stores the number of frames currently in an instance variable
+	Parameters: 
+	frames		number of frames since game was on
+
+collectPop() Finds the current population of alive cells and returns it
+	Return: number
+
+popWacky() Checks if population is changing
+	Paramaters:
+	number		the number determinig amount of leeway to determine if the population is not constant		
+	Return: boolean
+
+popConstant() Checks if population is a non-zero constant
+	Paramaters:
+	number		the number determining amount of leeway in determining what qualifies as constant
+	Return: boolean
+
+popZero() Checks if population is zero
+	Return: boolean
+
+avePosition() Calculates the average x position and the average y position over a set number of frames
+	Return: two-variable object with x and y coordinate representing average point
+
+diffPosition() Checks if average position is changing
+	Return: boolean
+
+samePosition() Checks if average position is constant
+	Return: boolean
+
+linearMotion() Checks if any of the changes in y or x over the past three frames were one
+	Return: boolean
 
 Game functions:
     Syntax: Game.mutate()
@@ -256,3 +310,25 @@ Evolution drawOnPos()
 
 	Return Value
 		None.
+
+Selector functions:
+
+dismiss(popNumber) Checks if the population is zero or there is a constant population and position
+	Paramaters:
+	popNumber		the number determining amount of leeway in finding constancy of population
+	Return: boolean
+
+tierTwo(popNumber) Checks if the position is the same and the population is changing
+	Paramaters:
+	popNumber		the number determining amount of leeway in finding constancy of population
+	Return: boolean
+
+good(popNumber) Checks if the population is changing and the position is changing
+	Paramaters:
+	popNumber		the number determining amount of leeway in finding constancy of population
+	Return: boolean
+
+chaos(popNumber) Checks if the population is changing and the position is changing
+	Paramaters:
+	popNumber		the number determining amount of leeway in finding constancy of population
+	Return: boolean
