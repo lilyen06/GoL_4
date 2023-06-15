@@ -77,7 +77,7 @@ class DataSet {
         var i,j;
         if (this.popZero() == false) {
             for (i = (this.frames-5); i < this.frames; i++) {
-                for (j = 0; j < number; j++) {
+                for (j = 0; j <= number; j++) {
                     if (((pop + j) == this.array[i-1][2])||((pop - j) == this.array[i-1][2])) {
                         constantCounter += 1;
                         if (constantCounter >= 4) {
@@ -123,17 +123,44 @@ class DataSet {
     }
 
     samePosition() {
-        let pos = 0;
-        var i,j;
-        for (i = (this.frames-10); i < this.frames; i++) {
-            pos = this.array[i][2];
-            for (j = 0; j < 3; j++) {
-                if (((pos + j) == this.array[i-1][2])||((pos - j) == this.array[i-1][2])) {
+        let posx = this.array[this.frames][0];
+        var posy = this.array[this.frames][1];
+        var i;
+        for (i = (this.frames-4); i < this.frames; i++) {
+            if ((posx == this.array[i-1][0]) && ( posy == this.array[i-1][1])) {
                     return true;
-                }
             }
             return false;
         }
     }
+
+// linear motion function taken out after much experimenting because the slope was not actually the same with a glider, it would vary between slope of one and zero and dividing by zero was not doable, so although it could have been modified to accomodate this it would not be effective with respect to gliders
+    // linearMotion() {
+    //     var slope1;
+    //     var slope2;
+    //     var deltay1;
+    //     var deltax1;
+    //     var deltay2;
+    //     var deltax2;
+    //     var i;
+    //     deltay1 = (this.array[this.frames][1] - this.array[this.frames-1][1]);
+    //     deltax1 = (this.array[this.frames][0] - this.array[this.frames-1][0]);
+    //     slope1 = (deltay1/deltax1);
+    //     deltay2 = (this.array[this.frames-1][1] - this.array[this.frames-2][1]);
+    //     deltax2 = (this.array[this.frames-1][0] - this.array[this.frames-2][0]);
+    //     slope2 = (deltay2/deltax2);
+    //     for (i = 0; i < 5; i ++) {
+    //         console.log('hi');
+    //         console.log(deltay1+i);
+    //         console.log(deltay2);
+    //         if (((deltay1+i) == deltay2) || ((deltay1-i) == deltay2)) {
+    //             console.log(deltax1+i);
+    //             console.log(deltax2);
+    //                 if (((deltax1+i) == deltax2) || ((deltax1-i) == deltax2)) {
+    //                     return true;
+    //                 }
+    //         }
+    //     }
+    // }
 
 }

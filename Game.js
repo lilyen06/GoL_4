@@ -51,19 +51,21 @@ class Game{
 	 */
 	mutate(){
 		// if Selector's dismiss is triggered, or a pattern has been mutated 5 times, generate and mutate a new pattern
-		if (this.selector.dismiss(5,5)||this.mutated>=5){
+		if (this.selector.dismiss(5)||this.mutated>=5){
 			console.log('Dismiss');
 			this.reloop();
 			this.mutated = 0;
 		} 
 		// if Selector's chaos is triggered, mutate the pattern based on how many mutations it has already undergone
-		else if (this.selector.chaos(5,5)){
+		else if (this.selector.chaos(5)){
 			if (this.mutated <=3){
+				console.log('addPoint');
 				this.pattern = this.mutator.addPoint(this.pattern);
 				this.clear();
 				this.drawPat(this.pattern);
 				this.mutated++;
 			} else {
+				console.log('killPoint');
 				this.pattern = this.mutator.killPoint(this.pattern);
 				this.clear();
 				this.drawPat(this.pattern);
@@ -71,8 +73,8 @@ class Game{
 			}
 		}
 		// if Selector's good for a larger range is triggered, check if it is a perfect match, if not moveLonely, if yes draw the pattern and stop the game
-		else if (this.selector.good(5,5)){
-			if (!this.selector.good(0,0)){
+		else if (this.selector.good(5)){
+			if (!this.selector.good(0)){
 				console.log("found almost pat!");
 				this.pattern = this.mutator.moveLonely(this.pattern);
 				this.clear();
@@ -218,8 +220,13 @@ class Game{
 		this.data.populateArray();
 
 		this.frames++;
+
+		if (this.frames >11 && this.selector.good(0)) {
+			console.log("found pat!!!");
+			this.stop();
+		}
 		
-		if (this.frames >= 100||(this.frames>11 && this.selector.dismiss())){
+		if (this.frames >= 30||(this.frames>11 && this.selector.dismiss(0))){
 			if(this.evolve.reset%2==0){
 				this.evolve.reset=1;
 				this.plotter.clear();
