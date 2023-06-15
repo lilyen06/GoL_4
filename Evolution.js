@@ -1,6 +1,12 @@
 class Evolution{
     plot; dataSet; trial; reset;
 
+    /**
+	 * Construct an Evolution object with assigned plotter and dataset objects passed to it
+	 * called as Evoliution(Plotter plotter, DataSet dataset)
+	 * @param {int} plotter 
+	 * @param {int} ydataset
+	 */
     constructor(plotter, dataset){
         // instantiates the instance variables
         this.plot = plotter;
@@ -9,6 +15,10 @@ class Evolution{
         this.reset = 1;
     }
 
+    /**
+	 * Calls the drawOnPop() and drawOnPos() and increments the reset variable
+	 * called as Evolution.test()
+	 */
     test(){
         // encapsulating the two methods into one method
         this.drawOnPop();
@@ -16,6 +26,10 @@ class Evolution{
         this.reset++; // reset is used as a counter to control how many patterns are plotted on the generation plotter
     }
 
+    /**
+	 * Draws the frames-population graph using the data from the dataset array with the fillStyle "black"
+	 * called as Evolution.drawOnPop()
+	 */
     drawOnPop(){
         // draws the frames-population graph but in black to show a contrast for comparisions
         let can = document.getElementById("graph");
@@ -27,6 +41,10 @@ class Evolution{
         }
     }
 
+    /**
+	 * Draws the position graph using the data from the dataset array with the fillStyle "black"
+	 * called as Evolution.drawOnPos()
+	 */
     drawOnPos(){
         // draws the position graph but in black to show a contrast for comparisions
         let can = document.getElementById("graph");
