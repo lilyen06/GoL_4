@@ -135,32 +135,28 @@ class DataSet {
     }
 
 // linear motion function taken out after much experimenting because the slope was not actually the same with a glider, it would vary between slope of one and zero and dividing by zero was not doable, so although it could have been modified to accomodate this it would not be effective with respect to gliders
-    // linearMotion() {
-    //     var slope1;
-    //     var slope2;
-    //     var deltay1;
-    //     var deltax1;
-    //     var deltay2;
-    //     var deltax2;
-    //     var i;
-    //     deltay1 = (this.array[this.frames][1] - this.array[this.frames-1][1]);
-    //     deltax1 = (this.array[this.frames][0] - this.array[this.frames-1][0]);
-    //     slope1 = (deltay1/deltax1);
-    //     deltay2 = (this.array[this.frames-1][1] - this.array[this.frames-2][1]);
-    //     deltax2 = (this.array[this.frames-1][0] - this.array[this.frames-2][0]);
-    //     slope2 = (deltay2/deltax2);
-    //     for (i = 0; i < 5; i ++) {
-    //         console.log('hi');
-    //         console.log(deltay1+i);
-    //         console.log(deltay2);
-    //         if (((deltay1+i) == deltay2) || ((deltay1-i) == deltay2)) {
-    //             console.log(deltax1+i);
-    //             console.log(deltax2);
-    //                 if (((deltax1+i) == deltax2) || ((deltax1-i) == deltax2)) {
-    //                     return true;
-    //                 }
-    //         }
-    //     }
-    // }
+    linearMotion() {
+        var deltay1;
+        var deltax1;
+        var deltay2;
+        var deltax2;
+        var deltay3;
+        var deltax3;
+        var deltay4;
+        var deltax4;
+        deltay1 = (this.array[this.frames][1] - this.array[this.frames-1][1]);
+        deltax1 = (this.array[this.frames][0] - this.array[this.frames-1][0]);
+        deltay2 = (this.array[this.frames-1][1] - this.array[this.frames-2][1]);
+        deltax2 = (this.array[this.frames-1][0] - this.array[this.frames-2][0]);
+        deltay3 = (this.array[this.frames-2][1] - this.array[this.frames-3][1]);
+        deltax3 = (this.array[this.frames-2][0] - this.array[this.frames-3][0]);
+        deltay4 = (this.array[this.frames-3][1] - this.array[this.frames-4][1]);
+        deltax4 = (this.array[this.frames-3][0] - this.array[this.frames-4][0]);
+        if ((deltay1 = 1) || (deltax1 = 1) || (deltay2 == 1) || (deltax2 == 1)) {
+            if (((deltay3 = 1) || (deltax3 = 1) || (deltay4 == 1) || (deltax4 == 1))) {
+                return true;
+            }
+        }
+    }
 
 }

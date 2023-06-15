@@ -31,7 +31,9 @@ class Selector {
     //tracking sets of three as we go
     good(popNumber) {
         if ((this.data.diffPosition() == true) && (this.data.popConstant(popNumber) == true)) {
-            return true;
+            if (this.data.linearMotion()) {
+                return true;
+            }
         } return false;
     }
 
