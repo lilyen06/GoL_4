@@ -22,6 +22,7 @@ class Evolution{
         let ctx = can.getContext('2d');
         ctx.fillStyle="black";
         for(let i = 0; i<100; i++){
+            // using the data from the dataset array to plot the frames-population graph in black
             ctx.fillRect(20+i, this.plot.yAxis-this.trial[i][2], 1, 1);
         }
     }
@@ -32,6 +33,7 @@ class Evolution{
         let ctx = can.getContext('2d');
         ctx.fillStyle="black";
         for(let i = 0; i<100; i++){
+            // using the data form the dataset array to plot the average position of all cells in black
             ctx.fillRect(20+this.trial[i][0], this.trial[i][1]+30, 1, 1);
         }
     }
